@@ -1,0 +1,63 @@
+@base <http://apps4eu.eu/>.
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+#@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix apps4eu: <http://apps4eu.eu/voc#>.
+@prefix dvia: <http://data.eurecom.fr/ontology/dvia#>.
+@prefix schema: <http://schema.org/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+#@prefix br: <http://vocab.deri.ie/br#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+
+#we are also waiting for the Award ontology http://seevl.net/schema/awards
+
+# ------------------------------------------ Classes ---------------------------------------------------
+
+#Award	
+apps4eu:Award a rdfs:Class;
+	rdfs:label "Award" ;
+	rdfs:comment "the award offered by the jury to a certain App Concept" .
+
+
+# ---------------------------------------- Properties ----------------------------------------------------
+
+
+#apps4eu:awardDate
+apps4eu:awardDate a rdf:Property;
+	rdfs:label "award Date" ;
+	rdfs:comment "The date the award was offered." ;
+	rdfs:domain apps4eu:Award;
+	rdfs:range xsd:date .
+
+#apps4eu:awardTime
+apps4eu:awardTime a rdf:Property;
+	rdfs:label "award time" ;
+	rdfs:comment "The date the award was offered." ;
+	rdfs:domain apps4eu:Award;
+	rdfs:range xsd:date .
+
+#offeredAt	
+apps4eu:offeredAt a rdf:Property;
+	rdfs:label "offered" ;
+	rdfs:comment "The award was offered on a certain occasion (co-creation event, competition, contest, challenge )." ;
+	rdfs:domain apps4eu:Award;
+	rdfs:range apps4eu:Event .
+
+#prize
+apps4eu:prize a rdf:Property;
+	rdfs:label "prize" ;
+	rdfs:comment "The actual prize offered." ;
+	rdfs:domain apps4eu:Award;
+	rdfs:range xsd:string .	
+
+apps4eu:awardSponsor a rdf:Property; 
+	rdfs:label "award's sponsor" ;
+	rdfs:comment "The sponsor of the award" ;
+	rdfs:domain apps4eu:Award ;
+	#the range could be also be apps4eu:Sponsor including more details regarding the sponsor --> to be discussed.
+	rdfs:range foaf:Agent .

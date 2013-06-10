@@ -1,0 +1,108 @@
+@base <http://apps4eu.eu/odapps/voc#>.
+
+@prefix org: <http://www.w3.org/ns/org#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix odapps: <http://apps4eu.eu/odapps/voc#>.
+@prefix dvia: <http://data.eurecom.fr/ontology/dvia#>.
+@prefix schema: <http://schema.org/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rev:<http://purl.org/stuff/rev#> .
+
+# Would it make sense to have two namespaces? One for the app concept e.g. app and one for the competition-related classes and properties e.g. apps4eu?
+
+# ---------------------------------------- Classes ----------------------------------------------
+
+#App Concept
+# Need to decide on the proper term to call it 
+odapps:AppConcept a rdfs:Class;
+	#alternatively it could be App Concept, Application Concept Idea, Application Idea
+	#rdfs:subClassOf br:Idea ; #br:Idea is a subproperty of skos:Concept --> it doesn't make much sense
+	rdfs:label "Application Concept" ; 
+	rdfs:comment "An App Concept describes an idea conceived. The idea is based on Open Data and can be turned into an application." .
+
+#Application
+odapps:Application a rdfs:Class;
+	rdfs:subClassOf dvia:Application ;
+	rdfs:label "Application";
+	rdfs:comment "An application that uses Open Data in order to implement an App Concept".	
+
+# ------------------------------------ Properties ------------------------------------------------	
+
+
+#odapps:description
+odapps:description a rdf:Property;
+	rdfs:label "concept/idea description";
+	rdfs:comment "The description of the idea";
+	rdfs:domain odapps:AppConcept ;
+	rdfs:range xsd:string . 
+
+#odapps:conceived
+odapps:conceived a rdf:Property ;
+	rdfs:label "conceived by" ;
+	rdfs:comment "The Agent which conceived the idea about the App Concept" ;
+	rdfs:range foaf:Agent .
+
+#odapps:keyword
+#otherwise dc:subject
+odapps:keyword a rdf:Property ;
+	rdfs:label "keyword" ;
+	rdfs:comment "A keyword, a key phrase or a classification code describing the App Concept ".
+
+#odapps:revised
+odapps:revised a rdf:Property;
+	rdfs:label "revised" ;
+	rdfs:comment "An App concept which was revised and re-posed / extended. " ;
+	rdfs:domain odapps:AppConcept ;
+	rdfs:range  odapps:AppConcept .
+
+# maybe redundant to have both definitions..	
+#odapps:revises
+odapps:revised a rdf:Property;
+	rdfs:label "revised" ;
+	rdfs:comment "An App concept which was revised, re-posed and/or extended. " ;
+	rdfs:domain odapps:AppConcept ;
+	rdfs:range  odapps:AppConcept .
+	
+odapps:implements a rdf:Property ;
+	rdfs:label "implements" ;
+	rdfs:comment "The App Concept that this application implements" ;
+	rdfs:range odapps:Appconcept .	
+	
+# -------------------------------------------------------------------------------------------------
+
+odapps:AppConcept
+	#the URL where the App Concept is described, if any. 
+	foaf:homepage schema:WebPage;
+	
+	#the language used to describe the App Concept
+	dc:language dc:LinguisticSystem;
+	
+	#comments 
+	rev:hasComment rev:Comment ;
+	schema:comment schema:Comment ; 
+	
+	#review
+	rev:hasReview rev:Review ;
+	
+	#possible datasets that could be used in conjunction with this App Concept
+	dvia:consumes dcat:Dataset ;    # not pretty accurate, it shouldn't have an App Concept as domain
+
+	#contact details vcard?
+	schema:contactPoint schema:ContactPoint .
+	
+	#br:hasTopic br:BrTopic	; #actually a Property of br:Brainstorm
+	
+odapps:Application
+	dvia:platform dvia:Platform ;
+	dvia:designBy org:Organization ; # It would be better to be foaf:Agent, could'nt it be an individual to apply in our case?
+	dvia:consumes dcat:Dataset;
+	dvia:usesTool dvia:VisualTool;
+	dvia:hasLicense dc:License;
+	dvia:url xsd:anyURI;
+	dvia:keyword xsd:string ;
+	dvia:system xsd:string ;
+	dvia:downloadUrl xsd:anyURI.	
