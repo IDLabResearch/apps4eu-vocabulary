@@ -12,38 +12,36 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rev:<http://purl.org/stuff/rev#> .
 
-# Would it make sense to have two namespaces? One for the app concept e.g. app and one for the competition-related classes and properties e.g. apps4eu?
-
 # ---------------------------------------- Classes ----------------------------------------------
 
 #App Concept
-# Need to decide on the proper term to call it 
+ 
 odapps:AppConcept a rdfs:Class;
-	#alternatively it could be App Concept, Application Concept Idea, Application Idea
-	#rdfs:subClassOf br:Idea ; #br:Idea is a subproperty of skos:Concept --> it doesn't make much sense
 	rdfs:label "Application Concept" ; 
-	rdfs:comment "An App Concept describes an idea conceived. The idea is based on Open Data and can be turned into an application." .
+	rdfs:comment "An App Concept describes an idea for an application which refers to Open Data." .
 
 #Application
 odapps:Application a rdfs:Class;
-	rdfs:subClassOf dvia:Application ;
+	# @Raphael: We want to describe an application quite broadly: it could even be a physical art work or a technical mash-up API. Therefore we think the DVIA concept is not suitable. What do you think?
+	#rdfs:subClassOf dvia:Application ;
 	rdfs:label "Application";
-	rdfs:comment "An application that uses Open Data in order to implement an App Concept".	
+	rdfs:comment "An application is the implementation of an App Concept." .	
 
 # ------------------------------------ Properties ------------------------------------------------	
 
 
 #odapps:description
 odapps:description a rdf:Property;
-	rdfs:label "concept/idea description";
+	rdfs:label "An App Concept description";
 	rdfs:comment "The description of the idea";
-	rdfs:domain odapps:AppConcept ;
-	rdfs:range xsd:string . 
+	rdfs:domain odapps:AppConcept .
+	#do not limit the range, it might be a paragraph or a link to a blog post
 
 #odapps:conceived
 odapps:conceived a rdf:Property ;
 	rdfs:label "conceived by" ;
 	rdfs:comment "The Agent which conceived the idea about the App Concept" ;
+	rdfs:domain odapps:AppConcept ;
 	rdfs:range foaf:Agent .
 
 #odapps:keyword
@@ -62,7 +60,7 @@ odapps:revised a rdf:Property;
 # maybe redundant to have both definitions..	
 #odapps:revises
 odapps:revised a rdf:Property;
-	rdfs:label "revised" ;
+	rdfs:label "revises" ;
 	rdfs:comment "An App concept which was revised, re-posed and/or extended. " ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range  odapps:AppConcept .
@@ -70,7 +68,14 @@ odapps:revised a rdf:Property;
 odapps:implements a rdf:Property ;
 	rdfs:label "implements" ;
 	rdfs:comment "The App Concept that this application implements" ;
-	rdfs:range odapps:Appconcept .	
+	rdfs:domain odapps:Application ;
+	rdfs:range odapps:AppConcept .	
+
+odapps:consumes a rdf:Property ;
+	#possible datasets that could be used in conjunction with this App Concept
+	rdfs:label "consumes" ;
+	rdfs:comment "The App Concept can consume a certain dataset" ;
+	rdf:subPropertyOf dvia:consumes . # not pretty accurate, it shouldn't have an App Concept as domain
 	
 # -------------------------------------------------------------------------------------------------
 
@@ -85,17 +90,12 @@ odapps:AppConcept
 	rev:hasComment rev:Comment ;
 	schema:comment schema:Comment ; 
 	
-	#review
-	rev:hasReview rev:Review ;
-	
-	#possible datasets that could be used in conjunction with this App Concept
-	dvia:consumes dcat:Dataset ;    # not pretty accurate, it shouldn't have an App Concept as domain
-
 	#contact details vcard?
 	schema:contactPoint schema:ContactPoint .
 	
 	#br:hasTopic br:BrTopic	; #actually a Property of br:Brainstorm
-	
+
+#Normally we cannot use any of the DVIA Application's properties as their scope is too narrow (dvia:Application The aplication or the mashup developed for demo-ing or consuming data in LD fashion).	
 odapps:Application
 	dvia:platform dvia:Platform ;
 	dvia:designBy org:Organization ; # It would be better to be foaf:Agent, could'nt it be an individual to apply in our case?

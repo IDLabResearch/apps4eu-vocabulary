@@ -46,7 +46,7 @@ apps4eu:offeredAt a rdf:Property;
 	rdfs:label "offered" ;
 	rdfs:comment "The award was offered on a certain occasion (co-creation event, competition, contest, challenge )." ;
 	rdfs:domain apps4eu:Award;
-	rdfs:range apps4eu:Event .
+	rdfs:range apps4eu:CocreationEvent .
 
 #prize
 apps4eu:prize a rdf:Property;
