@@ -11,6 +11,7 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rev:<http://purl.org/stuff/rev#> .
+@prefix skos:<http://www.w3.org/2004/02/skos/core#>.
 
 # ---------------------------------------- Classes ----------------------------------------------
 
@@ -76,6 +77,29 @@ odapps:consumes a rdf:Property ;
 	rdfs:label "consumes" ;
 	rdfs:comment "The App Concept can consume a certain dataset" ;
 	rdf:subPropertyOf dvia:consumes . # not pretty accurate, it shouldn't have an App Concept as domain
+	
+odapps:theme a rdf:Property ;
+	rdfs:label "theme" ;
+	rdfs:comment "The App Concept can be within a certain theme. " ;
+	rdfs:domain odapps:AppConcept ;
+	rdfs:range skos:ConceptScheme .
+	
+#probably a broad taxonomy as the following one.
+#Public administration & policy,
+#Population,
+#Culture/Sport/Leisure time,
+#Territory,
+#Health,
+#Infrastructure,
+#Audience (Youth/Adult/Senior),
+#Environment & Nature,
+#Education & Lifelong learning,
+#Mobility
+#Tourism,
+#Safety,
+#Welfare,
+#Work & Economy,
+#Life/Home	
 	
 # -------------------------------------------------------------------------------------------------
 

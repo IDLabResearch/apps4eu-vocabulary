@@ -17,6 +17,7 @@
 @prefix lode: <http://linkedevents.org/ontology/> .
 @prefix dul: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
 @prefix rev:<http://purl.org/stuff/rev#> .
+@prefix skos:<http://www.w3.org/2004/02/skos/core#>.
 
 # ------------------------------------------ Classes --------------------------------------------
 
@@ -74,8 +75,12 @@ apps4eu:size a rdf:Property ;
 	rdfs:domain apps4eu:Event .
 
 #the theme of the event
-apps4eu:theme a rdf:Property.
-
+apps4eu:theme a rdf:Property ;
+	rdfs:label "theme" ;
+	rdfs:comment "The App Concept can be within a certain theme. " ;
+	rdfs:domain odapps:AppConcept ;
+	rdfs:range skos:ConceptScheme .
+	
 #probably a broad taxonomy as the following one.
 #Public administration & policy,
 #Population,
