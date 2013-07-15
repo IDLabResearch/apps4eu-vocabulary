@@ -133,7 +133,7 @@ apps4eu:sponsor a rdfs:Property ;
 	
 # --------------------------------------------------------------------------------------------------
 
-apps4eu:Event 
+apps4eu:CoCreationEvent 
 	#the title of the Event
 	dc:title [ rdfs:range xsd:string ] ;
 	
