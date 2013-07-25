@@ -2,8 +2,6 @@
 
 A vocabulary for Apps for X contests and their results
 
-[Google drive document with some more info](https://docs.google.com/document/d/12MlPI-Ln7FUTvQ4R8Wigcjg960HnwA_PgQ3cXN10YTM/edit?usp=sharing)
-
 # Contributors
 
 * Anastasia Dimou <anastasia.dimou aŧ UGent.be>
