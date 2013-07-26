@@ -263,10 +263,10 @@ apps4eu:CoCreationEvent
 	#time:hasBeginning [ rdfs:domain:TemporalEntity rdfs:range time:Instant ] ;
 	#time:hasEnd [ rdfs:domain:TemporalEntity rdfs:range time:Instant ] ;
 	
-	#the date and time the event start
+	#the date and time the event starts, turn it to #xsd:dateTime
 	schema:startDate [ rdfs:range xsd:date ];
 	
-	#the date and time the event ends
+	#the date and time the event ends, turn it to #xsd:dateTime
 	schema:endDate [ rdfs:range xsd:date ];
 	
 	#lode:atPlace [ rdfs:range dul:Place ] ; preferably dc:spatial
