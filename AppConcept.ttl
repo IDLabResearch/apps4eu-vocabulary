@@ -53,17 +53,6 @@ odapps:Application a rdfs:Class;
 
 # ------------------------------------ Properties ------------------------------------------------	
 
-#odapps:title
-
-odapps:title a rdf:Property, 
-		owl:DatatypeProperty;
-	rdfs:label "title";
-	rdfs:comment "The title of the idea / application";
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	rdfs:domain odapps:AppConcept ,
-			odapps:Application ;
-	rdfs:range xsd:string .
-
 
 #odapps:description
 
@@ -274,6 +263,14 @@ dvia:hasLicense a rdf:Property,
 
 # ---------------------------------------- Classes ------------------------------------------------
 
+
+#odapps:title
+
+dc:title a rdf:Property;
+	rdfs:label "Title";
+	rdfs:comment "A name given to the resource.";
+	rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+	rdfs:range xsd:string .
 
 
 #to describe the platform where the application works on
