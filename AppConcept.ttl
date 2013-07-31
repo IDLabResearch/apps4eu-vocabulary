@@ -56,8 +56,7 @@ odapps:Application a rdfs:Class;
 
 #odapps:description
 
-odapps:description a rdf:Property, 
-		owl:DatatypeProperty;
+odapps:description a rdf:Property;
 	rdfs:label "description";
 	rdfs:comment "The description of the idea";
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
@@ -67,8 +66,7 @@ odapps:description a rdf:Property,
 
 #odapps:conceived
 
-odapps:conceived a rdf:Property , 
-		owl:ObjectProperty;
+odapps:conceived a rdf:Property;
 	rdfs:label "conceived by" ;
 	rdfs:comment "The Agent which conceived the idea about the App Concept (the instigator/initiator)." ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
@@ -78,8 +76,7 @@ odapps:conceived a rdf:Property ,
 
 #odapps:implemented
 
-odapps:conceived a rdf:Property , 
-		owl:ObjectProperty;
+odapps:conceived a rdf:Property;
 	rdfs:label "implemented by" ;
 	rdfs:comment "The Agent which implemented the application." ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
@@ -90,8 +87,7 @@ odapps:conceived a rdf:Property ,
 #odapps:keyword
 
 #otherwise dc:subject
-odapps:keyword a rdf:Property , 
-		owl:DatatypeProperty;
+odapps:keyword a rdf:Property ;
 	rdfs:label "keyword" ;
 	rdfs:comment "A keyword, a key phrase or a classification code describing the App Concept " ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> .
@@ -99,32 +95,29 @@ odapps:keyword a rdf:Property ,
 
 #odapps:revised
 
-odapps:revised a rdf:Property, 
-		owl:ObjectProperty;	
+odapps:revised a rdf:Property ;	
 	rdfs:label "revised" ;
 	rdfs:comment "An App concept which was revised and re-posed / extended. " ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	owl:inverseOf odapps:revises ;
+	# owl:inverseOf odapps:revises ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range  odapps:AppConcept .
 
 
 #odapps:revises
 
-odapps:revised a rdf:Property, 
-		owl:ObjectProperty;
+odapps:revised a rdf:Property ;
 	rdfs:label "revises" ;
 	rdfs:comment "An App concept which was revised, re-posed and/or extended. " ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	owl:inverseOf odapps:revised ;
+	# owl:inverseOf odapps:revised ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range  odapps:AppConcept .
 	
 
 #odapps:implements	
 
-odapps:implements a rdf:Property , 
-		owl:ObjectProperty;
+odapps:implements a rdf:Property ;
 	rdfs:label "implements" ;
 	rdfs:comment "The App Concept that this application implements" ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
@@ -135,8 +128,7 @@ odapps:implements a rdf:Property ,
 #odapps:consumes
 # to decide either it will be redefined or the extended dvia:consumes will be used
 
-odapps:consumes a rdf:Property , 
-		owl:ObjectProperty;
+odapps:consumes a rdf:Property ;
 	#possible datasets that could be used in conjunction with this App Concept
 	rdfs:label "consumes" ;
 	rdfs:comment "The App Concept can consume a certain dataset" ;
@@ -145,8 +137,7 @@ odapps:consumes a rdf:Property ,
 
 #odapps:theme
 
-odapps:theme a rdf:Property , 
-		owl:ObjectProperty;
+odapps:theme a rdf:Property ;
 	rdfs:label "theme" ;
 	rdfs:comment "The App Concept can be within a certain theme. " ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
@@ -203,8 +194,7 @@ odapps:AppConcept
 #dvia:datasetDescription
 #modified
 
-dvia:datasetDescription a rdf:Property,
-		owl:DatatypeProperty;
+dvia:datasetDescription a rdf:Property ;
 	rdfs:comment "Property for descriptive information of the datasets to be used for this App concept. ";
 	rdfs:domain odapps:AppConcept ,
 			odapps:Application ;
@@ -214,8 +204,7 @@ dvia:datasetDescription a rdf:Property,
 #dvia:platform
 #modified
 
-dvia:platform a rdf:Property,
-		owl:ObjectProperty;
+dvia:platform a rdf:Property ;
 	rdfs:comment "This property links the application to a platform to actually use the application.";
 	#rdfs:domain dvia:Application;
 	rdfs:domain odapps:Application;
@@ -227,8 +216,7 @@ dvia:platform a rdf:Property,
 #dvia:consumes
 #modified
 
-dvia:consumes a rdf:Property,
-		owl:ObjectProperty;
+dvia:consumes a rdf:Property ;
 	rdfs:comment "links to the dataset used to make the application, and could be of different types or formats";
 	rdfs:domain odapps:Application;
 	rdfs:label "consumes";
@@ -238,8 +226,7 @@ dvia:consumes a rdf:Property,
 #dvia:downloadUrl
 #modified
 
-dvia:downloadUrl a rdf:Property,
-		owl:DatatypeProperty;
+dvia:downloadUrl a rdf:Property ;
 	rdfs:comment "The download url of the application.";
 	rdfs:domain odapps:Application;
 	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
@@ -249,8 +236,7 @@ dvia:downloadUrl a rdf:Property,
 
 #dvia:hasLicense
 
-dvia:hasLicense a rdf:Property,
-		owl:ObjectProperty;
+dvia:hasLicense a rdf:Property ;
 	rdfs:comment "This property links to the license of the application";
 	rdfs:domain odapps:Application;
 	rdfs:label "hasLicense".
@@ -275,8 +261,7 @@ dc:title a rdf:Property;
 
 #to describe the platform where the application works on
 
-dvia:Platform a rdfs:Class,
-		owl:Class;
+dvia:Platform a rdfs:Class ;
 	rdfs:comment "The platform where to host or use the application, could be on the web (firefox, chrome, IE, etc..) or mobile (android, etc..) or event desktop";
 	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
 	rdfs:label "Platform".
@@ -295,8 +280,7 @@ schema:SoftwareApplication a rdfs:Class;
 
 #dvia:preferredNavigator
 
-dvia:preferredNavigator a rdf:Property,
-		owl:DatatypeProperty;
+dvia:preferredNavigator a rdf:Property ;
 	rdfs:comment "The name of the preferred navigator to be used by the application";
 	rdfs:domain dvia:Platform;
 	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
@@ -306,8 +290,7 @@ dvia:preferredNavigator a rdf:Property,
 
 #dvia:alternativeNavigator
 
-dvia:alternativeNavigator a rdf:Property,
-		owl:DatatypeProperty;
+dvia:alternativeNavigator a rdf:Property ;
 	rdfs:comment "The name of the alternate navigator if applicable";
 	rdfs:domain dvia:Platform;
 	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
@@ -317,8 +300,7 @@ dvia:alternativeNavigator a rdf:Property,
 
 #dvia:system
 
-dvia:system a rdf:Property,
-		owl:DatatypeProperty;
+dvia:system a rdf:Property ;
 	rdfs:comment "The operating system where the application runs.";
 	rdfs:domain dvia:Platform;
 	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;

@@ -42,8 +42,7 @@ apps4eu:Submission a rdfs:Class;
 
 #Jury
 
-apps4eu:Jury a rdfs:Class, 
-		owl:Class;
+apps4eu:Jury a rdfs:Class ;
     rdfs:label "Jury" ;
     rdfs:comment "A jury evaluating the submissions to a co-creation event." .    
 
@@ -51,8 +50,7 @@ apps4eu:Jury a rdfs:Class,
 
 #apps4eu:edition
 
-apps4eu:edition a rdf:Datatype,
-		owl:DatatypeProperty;
+apps4eu:edition a rdf:Datatype ;
 	rdfs:label "edition" ;
 	rdfs:comment "The event edition. " ;
 	rdfs:domain apps4eu:Event ;
@@ -80,8 +78,7 @@ apps4eu:awardOffered a rdf:Property ;
 
 #registration	
 
-apps4eu:registration a rdf:Property ,
-		owl:DatatypeProperty;
+apps4eu:registration a rdf:Property ;
 	rdfs:label "url to the registration" ;
 	rdfs:comment "a link to the registration for the event" ;
 	rdfs:subPropertyOf schema:url ; 
@@ -149,8 +146,7 @@ apps4eu:sponsor a rdfs:Property ;
 
 #apps4eu:consistsOf
 
-    apps4eu:consistsOf a rdf:Property,
-    	owl:ObjectProperty;
+    apps4eu:consistsOf a rdf:Property ;
     rdfs:label "consists of" ;
     rdfs:comment "A submission consists of " ;
     rdfs:domain apps4eu:Submission ;
@@ -159,8 +155,7 @@ apps4eu:sponsor a rdfs:Property ;
 
 #nominated
 
-    apps4eu:nominated a rdf:Property,
-    	owl:ObjectProperty;
+    apps4eu:nominated a rdf:Property ;
     rdfs:label "nominated for" ;
     rdfs:comment "An App Concept is nominated for the award. " ;
     rdfs:domain apps4eu:Submission;
@@ -169,8 +164,7 @@ apps4eu:sponsor a rdfs:Property ;
 
 #apps4eu:wonAward
 
-    apps4eu:wonAward a rdf:Property,
-    	owl:ObjectProperty;
+    apps4eu:wonAward a rdf:Property ;
     rdfs:label "won award" ;
     rdfs:comment "links to the award that this App Concept won" ;
     rdfs:domain apps4eu:Submission ;
@@ -179,8 +173,7 @@ apps4eu:sponsor a rdfs:Property ;
 
  #apps4eu:juryRate
 
-    apps4eu:juryRate a rdf:Property,
-    	owl:ObjectProperty;
+    apps4eu:juryRate a rdf:Property ;
     rdfs:label "Jury's rate" ;
     rdfs:comment "The rate given by the jury" ;
     rdfs:domain apps4eu:Submission ;
@@ -189,8 +182,7 @@ apps4eu:sponsor a rdfs:Property ;
 
   #apps4eu:juryRate
 
-    apps4eu:usersRate a rdf:Property,
-    	owl:ObjectProperty;
+    apps4eu:usersRate a rdf:Property ;
     rdfs:label "Users' rate" ;
     rdfs:comment "The rate given by the users" ;
     rdfs:domain apps4eu:Submission ;
@@ -202,8 +194,7 @@ apps4eu:sponsor a rdfs:Property ;
 
 #apps4eu:juryMembers
 
-    apps4eu:juryMembers a rdf:Property,
-    	owl:ObjectProperty;
+    apps4eu:juryMembers a rdf:Property ;
     rdfs:label "Jury Members" ;
     rdfs:comment "A jury consists of " ;
     rdfs:domain apps4eu:Jury ;
