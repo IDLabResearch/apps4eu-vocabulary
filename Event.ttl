@@ -130,7 +130,7 @@ apps4eu:organizer a rdfs:Property ;
 	rdfs:label "the event's organizer" ;
 	rdfs:comment "  " ;
 	rdfs:domain apps4eu:Event ;
-	rdfs:range xsd:string .
+	rdfs:range foaf:Agent .
 
 
 #apps4eu:sponsor
@@ -139,7 +139,7 @@ apps4eu:sponsor a rdfs:Property ;
 	rdfs:label "the event's sponsor" ;
 	rdfs:comment "  " ;
 	rdfs:domain apps4eu:Event ;
-	rdfs:range [ a owl:Class; owl:unionOf (xsd:string rdfs:Resource) ] .
+	rdfs:range foaf:Agent .
 
 #social media to track, namely twitter, facebook, google+ etc. etc.
 
@@ -255,10 +255,10 @@ apps4eu:CoCreationEvent
 	#time:hasEnd [ rdfs:domain:TemporalEntity rdfs:range time:Instant ] ;
 	
 	#the date and time the event starts, turn it to #xsd:dateTime
-	schema:startDate [ rdfs:range xsd:date ];
+	schema:startDate [ a schema:Date ];
 	
 	#the date and time the event ends, turn it to #xsd:dateTime
-	schema:endDate [ rdfs:range xsd:date ];
+	schema:endDate [ a xsd:Date ];
 	
 	#lode:atPlace [ rdfs:range dul:Place ] ; preferably dc:spatial
 	dc:spatial [rdfs:range dc:Location ] ;

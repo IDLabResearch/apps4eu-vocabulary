@@ -9,7 +9,6 @@
 @prefix dvia: <http://data.eurecom.fr/ontology/dvia#>.
 @prefix schema: <http://schema.org/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix dc: <http://purl.org/dc/terms/> .
 @prefix dct: <http://purl.org/dc/terms/>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rev:<http://purl.org/stuff/rev#> .
@@ -20,7 +19,7 @@
 
 <http://apps4eu.eu/odapps/voc#>
 	a owl:Ontology;
-	rdfs:comment "odapps is an RDF vocabulary designed to facilitate the description of Open-Data-based ideas and applications published on the Web.";
+	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based ideas and applications published on the Web.";
 	dct:title "The vocabulary for (L)OD ideas and applications"@en;
 	dct:issued "2013-05-10"^^xsd:date;
     dct:modified "2013-07-24"^^xsd:date;
@@ -39,58 +38,17 @@ odapps:AppConcept a rdfs:Class;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> .
 
 
-#Application
-
-odapps:Application a rdfs:Class;
-	# @Raphael: We want to describe an application quite broadly: it could even be a physical art work or a technical mash-up API. 
-	#Therefore we think the DVIA concept is not suitable. What do you think?
-	#dvia:Application rdfs:subClassOf odapps:Application;
-	rdfs:label "Application";
-	rdfs:comment "An App Concept implementation." ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> .	
-
-
-
 # ------------------------------------ Properties ------------------------------------------------	
 
 
-#odapps:description
+#odapps:instigator
 
-odapps:description a rdf:Property;
-	rdfs:label "description";
-	rdfs:comment "The description of the idea";
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	rdfs:domain odapps:AppConcept .
-	#do not limit the range, it might be a paragraph or a link to a blog post
-
-
-#odapps:conceived
-
-odapps:conceived a rdf:Property;
-	rdfs:label "conceived by" ;
+odapps:instigator a rdf:Property;
+	rdfs:label "instigator" ;
 	rdfs:comment "The Agent which conceived the idea about the App Concept (the instigator/initiator)." ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range foaf:Agent .
-
-
-#odapps:implemented
-
-odapps:conceived a rdf:Property;
-	rdfs:label "implemented by" ;
-	rdfs:comment "The Agent which implemented the application." ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	rdfs:domain odapps:Application ;
-	rdfs:range foaf:Agent .	
-
-
-#odapps:keyword
-
-#otherwise dc:subject
-odapps:keyword a rdf:Property ;
-	rdfs:label "keyword" ;
-	rdfs:comment "A keyword, a key phrase or a classification code describing the App Concept " ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> .
 
 
 #odapps:revised
@@ -100,8 +58,8 @@ odapps:revised a rdf:Property ;
 	rdfs:comment "An App concept which was revised and re-posed / extended. " ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
 	# owl:inverseOf odapps:revises ;
-	rdfs:domain odapps:AppConcept ;
-	rdfs:range  odapps:AppConcept .
+	rdfs:domain odapps:AppConcept, dvia:Application ;
+	rdfs:range  odapps:AppConcept, dvia:Application .
 
 
 #odapps:revises
@@ -111,8 +69,8 @@ odapps:revised a rdf:Property ;
 	rdfs:comment "An App concept which was revised, re-posed and/or extended. " ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
 	# owl:inverseOf odapps:revised ;
-	rdfs:domain odapps:AppConcept ;
-	rdfs:range  odapps:AppConcept .
+	rdfs:domain odapps:AppConcept, dvia:Application ;
+	rdfs:range  odapps:AppConcept, dvia:Application .
 	
 
 #odapps:implements	
@@ -121,18 +79,8 @@ odapps:implements a rdf:Property ;
 	rdfs:label "implements" ;
 	rdfs:comment "The App Concept that this application implements" ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	rdfs:domain odapps:Application ;
+	rdfs:domain dvia:Application ;
 	rdfs:range odapps:AppConcept .	
-
-
-#odapps:consumes
-# to decide either it will be redefined or the extended dvia:consumes will be used
-
-odapps:consumes a rdf:Property ;
-	#possible datasets that could be used in conjunction with this App Concept
-	rdfs:label "consumes" ;
-	rdfs:comment "The App Concept can consume a certain dataset" ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> .
 	
 
 #odapps:theme
@@ -171,7 +119,7 @@ odapps:AppConcept
 	foaf:homepage schema:WebPage;
 	
 	#the language used to describe the App Concept
-	dc:language dc:LinguisticSystem;
+	dct:language dct:LinguisticSystem;
 	
 	#comments 
 	rev:hasComment rev:Comment ;
@@ -184,265 +132,32 @@ odapps:AppConcept
 
 
 
-# --------------------------------------  Extension  -----------------------------------------------
-
-
-
-# ------------------------------------ Properties ------------------------------------------------	
-
-
 #dvia:datasetDescription
-#modified
-
-dvia:datasetDescription a rdf:Property ;
-	rdfs:comment "Property for descriptive information of the datasets to be used for this App concept. ";
-	rdfs:domain odapps:AppConcept ,
-			odapps:Application ;
-	rdfs:label "dataset description".
-
-
-#dvia:platform
-#modified
-
-dvia:platform a rdf:Property ;
-	rdfs:comment "This property links the application to a platform to actually use the application.";
-	#rdfs:domain dvia:Application;
-	rdfs:domain odapps:Application;
-	#rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
-	rdfs:label "platform";
-	rdfs:range dvia:Platform.
+#no use the original one - was modified
 
 
 #dvia:consumes
-#modified
-
-dvia:consumes a rdf:Property ;
-	rdfs:comment "links to the dataset used to make the application, and could be of different types or formats";
-	rdfs:domain odapps:Application;
-	rdfs:label "consumes";
-	rdfs:range dcat:Dataset.
+#use the original - was modified
 
 
 #dvia:downloadUrl
-#modified
-
-dvia:downloadUrl a rdf:Property ;
-	rdfs:comment "The download url of the application.";
-	rdfs:domain odapps:Application;
-	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
-	rdfs:label "download url";
-	rdfs:range xsd:anyURI .
-
-
-#dvia:hasLicense
-
-dvia:hasLicense a rdf:Property ;
-	rdfs:comment "This property links to the license of the application";
-	rdfs:domain odapps:Application;
-	rdfs:label "hasLicense".
-	#rdfs:range dct:License.
-
-
-
-# ----------------------------------properties to be reused ----------------------------------------
-
-
-# ---------------------------------------- Classes ------------------------------------------------
-
-
-#odapps:title
-
-dc:title a rdf:Property;
-	rdfs:label "Title";
-	rdfs:comment "A name given to the resource.";
-	rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-	rdfs:range xsd:string .
-
-
-#to describe the platform where the application works on
-
-dvia:Platform a rdfs:Class ;
-	rdfs:comment "The platform where to host or use the application, could be on the web (firefox, chrome, IE, etc..) or mobile (android, etc..) or event desktop";
-	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
-	rdfs:label "Platform".
-
-
-#to describe the specifications of the application
-
-schema:SoftwareApplication a rdfs:Class;
-    rdfs:label "Software Application"@en;
-    rdfs:subClassOf schema:CreativeWork;
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
-
-
-# ------------------------------------ Properties ------------------------------------------------	
-
-
-#dvia:preferredNavigator
-
-dvia:preferredNavigator a rdf:Property ;
-	rdfs:comment "The name of the preferred navigator to be used by the application";
-	rdfs:domain dvia:Platform;
-	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
-	rdfs:label "preferred navigator";
-	rdfs:range xsd:string.
-
-
-#dvia:alternativeNavigator
-
-dvia:alternativeNavigator a rdf:Property ;
-	rdfs:comment "The name of the alternate navigator if applicable";
-	rdfs:domain dvia:Platform;
-	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
-	rdfs:label "alternative navigator";
-	rdfs:range xsd:string.
-
-
-#dvia:system
-
-dvia:system a rdf:Property ;
-	rdfs:comment "The operating system where the application runs.";
-	rdfs:domain dvia:Platform;
-	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
-	rdfs:label "system";
-	rdfs:range xsd:string.
 
 
 #schema:downloadUrl
 #there should stay either the schema:downloadUrl or the dvia:downloadUrl or to define the odapps:downloadUrl
 
-schema:downloadUrl a rdf:Property;
-    rdfs:label "Download Url"@en;
-    rdfs:comment "If the file can be downloaded, URL to download the binary."@en;
-    rdfs:domain schema:SoftwareApplication;
-    rdfs:range rdfs:Resource;
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+#odapps:keyword
+#use dct:subject instead 
+
+
+#odapps:description
+#use dct:description instead
 
 
 #schema:fileFormat
 #not sure if it's really needed
 
-schema:fileFormat a rdf:Property;
-    rdfs:label "File Format"@en;
-    rdfs:comment "MIME format of the binary (e.g. application/zip)."@en;
-    rdfs:domain schema:SoftwareApplication;
-    rdfs:range xsd:string;
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+#dvia:system OR schema:operatingSystem
 
-
-#schema:fileSize
-
-schema:fileSize a rdf:Property;
-    rdfs:label "File Size"@en;
-    rdfs:comment "Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB etc.), KB will be assumed."@en;
-    rdfs:domain schema:SoftwareApplication;
-    rdfs:range xsd:integer;
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
-
-
-#schema:operatingSystem
-
-schema:operatingSystem a rdf:Property;
-    rdfs:label "Operating System"@en;
-    rdfs:comment "Operating systems supported (Windows 7, OSX 10.6, Android 1.6)."@en;
-    rdfs:domain schema:SoftwareApplication;
-    rdfs:range xsd:string;
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
-
-
-#schema:requirements
-
-schema:requirements a rdf:Property;
-    rdfs:label "Requirements"@en;
-    rdfs:comment "Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (Examples: DirectX, Java or .NET runtime)."@en;
-    rdfs:domain schema:SoftwareApplication;
-    rdfs:range [ a owl:Class; owl:unionOf (xsd:string rdfs:Resource) ];
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
-
-
-#schema:softwareVersion
-
-schema:softwareVersion a rdf:Property;
-    rdfs:label "Software Version"@en;
-    rdfs:comment "Version of the software instance."@en;
-    rdfs:domain schema:SoftwareApplication;
-    rdfs:range xsd:string;
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
-
-
-#schema:storageRequirements
-
-schema:storageRequirements a rdf:Property;
-    rdfs:label "Storage Requirements"@en;
-    rdfs:comment "Storage requirements (free space required)."@en;
-    rdfs:domain schema:SoftwareApplication;
-    rdfs:range [ a owl:Class; owl:unionOf (xsd:string rdfs:Resource) ];
-    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
-
-
-#schema:dateCreated
-
-schema:dateCreated a rdf:Property;
-    rdfs:label "Date Created"@en;
-    rdfs:comment "The date on which the CreativeWork was created."@en;
-    rdfs:domain schema:CreativeWork;
-    rdfs:range xsd:date;
-    rdfs:isDefinedBy <http://schema.org/CreativeWork> .
-
-
-#schema:dateModified
-
-schema:dateModified a rdf:Property;
-    rdfs:label "Date Modified"@en;
-    rdfs:comment "The date on which the CreativeWork was most recently modified."@en;
-    rdfs:domain schema:CreativeWork;
-    rdfs:range xsd:date;
-    rdfs:isDefinedBy <http://schema.org/CreativeWork> .
-
-
-#schema:datePublished
-
-schema:datePublished a rdf:Property;
-    rdfs:label "Date Published"@en;
-    rdfs:comment "Date of first broadcast/publication."@en;
-    rdfs:domain schema:CreativeWork;
-    rdfs:range xsd:date;
-    rdfs:isDefinedBy <http://schema.org/CreativeWork> .
-
-
-#schema:logo
-
-schema:logo a rdf:Property;
-    rdfs:label "Logo"@en;
-    rdfs:comment "URL of an image for the logo of the item."@en;
-    rdfs:domain [ a owl:Class; owl:unionOf (schema:Organization schema:Brand schema:Place schema:Product) ];
-    rdfs:range [ a owl:Class; owl:unionOf (rdfs:Resource schema:ImageObject) ];
-    rdfs:isDefinedBy <http://schema.org/Organization>;
-    rdfs:isDefinedBy <http://schema.org/Brand>;
-    rdfs:isDefinedBy <http://schema.org/Place>;
-    rdfs:isDefinedBy <http://schema.org/Product> .
-
-
-#schema:programmingLanguage
-
-schema:programmingLanguage a rdf:Property;
-    rdfs:label "Programming Language"@en;
-    rdfs:comment "The computer programming language."@en;
-    rdfs:domain schema:Code;
-    rdfs:range schema:Thing;
-    rdfs:isDefinedBy <http://schema.org/Code> .
-
-schema:codeRepository a rdf:Property;
-    rdfs:label "Code Repository"@en;
-    rdfs:comment "Link to the repository where the un-compiled, human readable code and related code is located (SVN, github, CodePlex)"@en;
-    rdfs:domain schema:Code;
-    rdfs:range rdfs:Resource;
-    rdfs:isDefinedBy <http://schema.org/Code> .        
-
-
-#odapps:Application	
-	#dvia:designBy org:Organization ; # It would be better to be foaf:Agent, could'nt it be an individual to apply in our case?
-	#dvia:usesTool dvia:VisualTool;
-	#dvia:url xsd:anyURI;
-	# dvia:system xsd:string ;
-
+#define the Derivative Vs Original Work
