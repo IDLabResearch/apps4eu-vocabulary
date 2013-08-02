@@ -1,11 +1,10 @@
-@base <http://apps4eu.eu/odapps#>.
+@base <http://apps4eu.eu/vocab/odapps#>.
 
 @prefix org: <http://www.w3.org/ns/org#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
 @prefix odapps: <http://apps4europe.eu/vocab/odapps#>.
-@prefix apps4eu: <http://apps4europe.eu/vocab/apps4X#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix dvia: <http://data.eurecom.fr/ontology/dvia#>.
 @prefix schema: <http://schema.org/> .
@@ -71,7 +70,7 @@ odapps:consumes a rdf:Property,
 
 #datasetDescription
 
-dvia:datasetDescription a rdf:Property;
+odapps:datasetDescription a rdf:Property;
 	rdfs:comment "Property for a given descriptive informations of the datasets used for making the application. It could be used when no more details are given on the datasets like URL, formats, etc.";
 	rdfs:domain odapps:AppConcept, odapps:Application;
 	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
@@ -108,16 +107,6 @@ odapps:revision a rdf:Property ;
 	rdfs:range  odapps:AppConcept, odapps:Application .
 	
 
-#odapps:theme
-
-odapps:theme a rdf:Property ;
-	rdfs:label "theme" ;
-	rdfs:comment "The App Concept can be within a certain theme. " ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
-	rdfs:domain odapps:AppConcept ;
-	rdfs:range skos:ConceptScheme .
-	
-
 #usesTool
 
 odapps:usesTool a rdf:Property;
@@ -126,24 +115,3 @@ odapps:usesTool a rdf:Property;
 	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
 	rdfs:label "usesTool";
 	rdfs:range odapps:Tool.
-
-
-# -------------------------------------------------------------------------------------------------
-
-#probably a broad taxonomy as the following one.
-#Public administration & policy,
-#Population,
-#Culture/Sport/Leisure time,
-#Territory,
-#Health,
-#Infrastructure,
-#Audience (Youth/Adult/Senior),
-#Environment & Nature,
-#Education & Lifelong learning,
-#Mobility
-#Tourism,
-#Safety,
-#Welfare,
-#Work & Economy,
-#Life/Home	
-	
