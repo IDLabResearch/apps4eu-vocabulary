@@ -1,3 +1,24 @@
+@base <http://apps4eu.eu/odapps#>.
+
+@prefix org: <http://www.w3.org/ns/org#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix odapps: <http://apps4europe.eu/vocab/odapps#>.
+@prefix apps4eu: <http://apps4europe.eu/vocab/apps4X#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix dvia: <http://data.eurecom.fr/ontology/dvia#>.
+@prefix schema: <http://schema.org/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rev:<http://purl.org/stuff/rev#> .
+@prefix skos:<http://www.w3.org/2004/02/skos/core#>.
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl# > .
+@prefix lode: <http://linkedevents.org/ontology/> .
+
+
 # ----------------------------------properties to be reused ----------------------------------------
 
 
@@ -169,7 +190,7 @@ odapps:AppConcept
     
     #comments - to decide
     rev:hasComment rev:Comment ;
-    schema:comment schema:Comment ; 
+    schema:comment schema:Comment .
 
 #should stay either the schema:downloadUrl or the dvia:downloadUrl or to define the odapps:downloadUrl
 
@@ -190,14 +211,12 @@ odapps:AppConcept
 	
 apps4eu:CoCreationEvent 
      
-    #An Event that is part of this event.
+    event:sub_event [ a event:Event ] ;
+    schema:subEvent [ a schema:Event ] ;
+    schema:superEvent [ a schema:Event ] ;
     
-    event:sub_event [ rdfs:range event:Event ] ;
-    schema:subEvent [ rdfs:range schema:Event ] ;
-    schema:superEvent [ rdfs:range schema:Event ] ;
-    
-    lode:atTime [ rdfs:range time:TemporalEntity; ] ;
-    event:time [ rdfs:range time:TemporalEntity; ] ;
+    #lode:atTime [ a time:TemporalEntity; ] ;
+    #event:time [ a time:TemporalEntity; ] ;
     
     #the date and time the event starts, turn it to #xsd:dateTime
     schema:startDate [ a schema:Date ];
@@ -206,21 +225,20 @@ apps4eu:CoCreationEvent
     schema:endDate [ a xsd:Date ];
 
     #lode:atPlace Vs event:place Vs schema:location
-    #lode:atPlace [ rdfs:range dul:Place ] ; preferably dc:spatial
-    dc:spatial [rdfs:range dc:Location ] ;
+    #lode:atPlace [ a dul:Place ] ; preferably dc:spatial
+    dct:spatial [ a dct:Location ] .
 
     #abstract region of space
-    lode:inSpace [ rdfs:range geo:SpatialThing; ] ;
-    event:place [ rdfs:range geo:SpatialThing; ] ;
+    #lode:inSpace [ a geo:SpatialThing; ] ;
+    #event:place [ a geo:SpatialThing; ] ;
     
     #attendee is not exactly what is needed as it is not an attendee but rather a participant when it refers to a competition.
     #or keep both the notion of attendee and participant? 
-    #schema:attendee [rdfs:range [a owl:Class ; owl:unionOf (schema:Organization schema:Person) ] ] ;
+    #schema:attendee [ a [a owl:Class ; owl:unionOf (schema:Organization schema:Person) ] ] 
   
 apps4eu:Submission  
     #review
     rev:hasReview rev:Review .
 
 #social media to track, namely twitter, facebook, google+ etc. etc.
-#schema:award [ rdfs:range xsd:srting ] has string at its domain, therefore you cannot include more information about  the award
-    
+#schema:award [ a xsd:srting ] has string at its domain, therefore you cannot include more information about  the award
