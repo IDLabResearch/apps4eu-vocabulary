@@ -1,0 +1,226 @@
+# ----------------------------------properties to be reused ----------------------------------------
+
+
+# ---------------------------------------- Classes ------------------------------------------------
+
+
+#to describe the platform where the application works on
+
+dvia:Platform a rdfs:Class ;
+	rdfs:comment "The platform where to host or use the application, could be on the web (firefox, chrome, IE, etc..) or mobile (android, etc..) or event desktop";
+	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
+	rdfs:label "Platform".
+
+
+#to describe the specifications of the application
+
+schema:SoftwareApplication a rdfs:Class;
+    rdfs:label "Software Application"@en;
+    rdfs:subClassOf schema:CreativeWork;
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+    
+
+
+# ------------------------------------ Properties ------------------------------------------------	
+
+
+dct:title a rdf:Property;
+    rdfs:label "Title";
+    rdfs:comment "A name given to the resource.";
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:range xsd:string .
+
+
+#dct:subject
+
+#dvia:preferredNavigator 
+
+#dvia:alternativeNavigator
+
+#dvia:system
+
+#dvia:url
+
+schema:downloadUrl a rdf:Property;
+    rdfs:label "Download Url"@en;
+    rdfs:comment "If the file can be downloaded, URL to download the binary."@en;
+    rdfs:domain schema:SoftwareApplication;
+    rdfs:range rdfs:Resource;
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+schema:fileFormat a rdf:Property;
+    rdfs:label "File Format"@en;
+    rdfs:comment "MIME format of the binary (e.g. application/zip)."@en;
+    rdfs:domain schema:SoftwareApplication;
+    rdfs:range xsd:string;
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+schema:fileSize a rdf:Property;
+    rdfs:label "File Size"@en;
+    rdfs:comment "Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB etc.), KB will be assumed."@en;
+    rdfs:domain schema:SoftwareApplication;
+    rdfs:range xsd:integer;
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+schema:operatingSystem a rdf:Property;
+    rdfs:label "Operating System"@en;
+    rdfs:comment "Operating systems supported (Windows 7, OSX 10.6, Android 1.6)."@en;
+    rdfs:domain schema:SoftwareApplication;
+    rdfs:range xsd:string;
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+schema:requirements a rdf:Property;
+    rdfs:label "Requirements"@en;
+    rdfs:comment "Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (Examples: DirectX, Java or .NET runtime)."@en;
+    rdfs:domain schema:SoftwareApplication;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:string rdfs:Resource) ];
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+schema:softwareVersion a rdf:Property;
+    rdfs:label "Software Version"@en;
+    rdfs:comment "Version of the software instance."@en;
+    rdfs:domain schema:SoftwareApplication;
+    rdfs:range xsd:string;
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+schema:storageRequirements a rdf:Property;
+    rdfs:label "Storage Requirements"@en;
+    rdfs:comment "Storage requirements (free space required)."@en;
+    rdfs:domain schema:SoftwareApplication;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:string rdfs:Resource) ];
+    rdfs:isDefinedBy <http://schema.org/SoftwareApplication> .
+
+
+schema:dateCreated a rdf:Property;
+    rdfs:label "Date Created"@en;
+    rdfs:comment "The date on which the CreativeWork was created."@en;
+    rdfs:domain schema:CreativeWork;
+    rdfs:range xsd:date;
+    rdfs:isDefinedBy <http://schema.org/CreativeWork> .
+
+
+schema:dateModified a rdf:Property;
+    rdfs:label "Date Modified"@en;
+    rdfs:comment "The date on which the CreativeWork was most recently modified."@en;
+    rdfs:domain schema:CreativeWork;
+    rdfs:range xsd:date;
+    rdfs:isDefinedBy <http://schema.org/CreativeWork> .
+
+
+schema:datePublished a rdf:Property;
+    rdfs:label "Date Published"@en;
+    rdfs:comment "Date of first broadcast/publication."@en;
+    rdfs:domain schema:CreativeWork;
+    rdfs:range xsd:date;
+    rdfs:isDefinedBy <http://schema.org/CreativeWork> .
+
+
+schema:logo a rdf:Property;
+    rdfs:label "Logo"@en;
+    rdfs:comment "URL of an image for the logo of the item."@en;
+    rdfs:domain [ a owl:Class; owl:unionOf (schema:Organization schema:Brand schema:Place schema:Product) ];
+    rdfs:range [ a owl:Class; owl:unionOf (rdfs:Resource schema:ImageObject) ];
+    rdfs:isDefinedBy <http://schema.org/Organization>;
+    rdfs:isDefinedBy <http://schema.org/Brand>;
+    rdfs:isDefinedBy <http://schema.org/Place>;
+    rdfs:isDefinedBy <http://schema.org/Product> .
+
+
+schema:programmingLanguage a rdf:Property;
+    rdfs:label "Programming Language"@en;
+    rdfs:comment "The computer programming language."@en;
+    rdfs:domain schema:Code;
+    rdfs:range schema:Thing;
+    rdfs:isDefinedBy <http://schema.org/Code> .
+
+schema:codeRepository a rdf:Property;
+    rdfs:label "Code Repository"@en;
+    rdfs:comment "Link to the repository where the un-compiled, human readable code and related code is located (SVN, github, CodePlex)"@en;
+    rdfs:domain schema:Code;
+    rdfs:range rdfs:Resource;
+    rdfs:isDefinedBy <http://schema.org/Code> .        
+
+
+# we better have it with foaf:Agent as range
+schema:contactPoint a rdf:Property;
+    rdfs:label "Contact Point"@en;
+    rdfs:comment "A contact point for a person or organization."@en;
+    rdfs:isDefinedBy <http://apps4eu.eu/voc/apps4X#> ;
+    rdfs:domain [ a owl:Class; owl:unionOf (schema:Organization schema:Person) ];
+    rdfs:range schema:ContactPoint;
+    rdfs:isDefinedBy <http://schema.org/Organization>;
+    rdfs:isDefinedBy <http://schema.org/Person> .
+
+
+odapps:AppConcept
+    #the URL where the App Concept is described, if any. 
+    foaf:homepage schema:WebPage;
+    
+    #the language used to describe the App Concept
+    dct:language dct:LinguisticSystem;
+    
+    #comments - to decide
+    rev:hasComment rev:Comment ;
+    schema:comment schema:Comment ; 
+
+#should stay either the schema:downloadUrl or the dvia:downloadUrl or to define the odapps:downloadUrl
+
+#dct:subject Vs dvia:keyword 
+
+#dct:description
+
+#dvia:system OR schema:operatingSystem
+
+#define the Derivative Vs Original Work
+
+
+#odapps:Application 
+    #dvia:designBy org:Organization ; # It would be better to be foaf:Agent, could'nt it be an individual to apply in our case?
+    #dvia:usesTool dvia:VisualTool;
+    # dvia:system xsd:string ;
+
+	
+apps4eu:CoCreationEvent 
+     
+    #An Event that is part of this event.
+    
+    event:sub_event [ rdfs:range event:Event ] ;
+    schema:subEvent [ rdfs:range schema:Event ] ;
+    schema:superEvent [ rdfs:range schema:Event ] ;
+    
+    lode:atTime [ rdfs:range time:TemporalEntity; ] ;
+    event:time [ rdfs:range time:TemporalEntity; ] ;
+    
+    #the date and time the event starts, turn it to #xsd:dateTime
+    schema:startDate [ a schema:Date ];
+    
+    #the date and time the event ends, turn it to #xsd:dateTime
+    schema:endDate [ a xsd:Date ];
+
+    #lode:atPlace Vs event:place Vs schema:location
+    #lode:atPlace [ rdfs:range dul:Place ] ; preferably dc:spatial
+    dc:spatial [rdfs:range dc:Location ] ;
+
+    #abstract region of space
+    lode:inSpace [ rdfs:range geo:SpatialThing; ] ;
+    event:place [ rdfs:range geo:SpatialThing; ] ;
+    
+    #attendee is not exactly what is needed as it is not an attendee but rather a participant when it refers to a competition.
+    #or keep both the notion of attendee and participant? 
+    #schema:attendee [rdfs:range [a owl:Class ; owl:unionOf (schema:Organization schema:Person) ] ] ;
+  
+apps4eu:Submission  
+    #review
+    rev:hasReview rev:Review .
+
+#social media to track, namely twitter, facebook, google+ etc. etc.
+#schema:award [ rdfs:range xsd:srting ] has string at its domain, therefore you cannot include more information about  the award
+    
