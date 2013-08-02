@@ -4,7 +4,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
-@prefix odapps: <http://apps4eu.eu/odapps/voc#>.
+@prefix odapps: <http://apps4europe.eu/vocab/odapps#>.
+@prefix apps4eu: <http://apps4europe.eu/vocab/apps4X#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix dvia: <http://data.eurecom.fr/ontology/dvia#>.
 @prefix schema: <http://schema.org/> .
@@ -17,7 +18,7 @@
 
 # ---------------------------------------- Metadata----------------------------------------------
 
-<http://apps4eu.eu/odapps/voc#>
+<http://apps4europe.eu/vocab/odapps#>
 	a owl:Ontology;
 	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based ideas and applications published on the Web.";
 	dct:title "The vocabulary for (L)OD ideas and applications"@en;
@@ -35,10 +36,46 @@
 odapps:AppConcept a rdfs:Class;
 	rdfs:label "Application Concept" ; 
 	rdfs:comment "An App Concept describes an idea for an application (a digital work) which refers to Open Data." ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> .
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> .
 
+
+#Application
+#either extending the dvia:Application or having the odapps:Application
+
+odapps:Application a rdfs:Class;
+	#dvia:Application rdfs:subClassOf odapps:Application;
+	rdfs:label "Application";
+	rdfs:comment "An App Concept implementation." ;
+	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> . 
+
+
+odapps:Tool a rdfs:Class,
+		owl:Class;
+	rdfs:comment "The tool or library used to build the application";
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
+	#dvia:VisualTool rdfs:subClassOf odapps:Tool ;
+	rdfs:label "Tool".
 
 # ------------------------------------ Properties ------------------------------------------------	
+
+#odapps:consumes
+
+odapps:consumes a rdf:Property,
+		owl:ObjectProperty;
+	rdfs:comment "links to the dataset used to make the application, and could be of different types or formats";
+	rdfs:domain odapps:Application, odapps:AppConcept;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
+	rdfs:label "consumes";
+	rdfs:range dcat:Dataset, xsd:string.
+
+
+#datasetDescription
+
+dvia:datasetDescription a rdf:Property;
+	rdfs:comment "Property for a given descriptive informations of the datasets used for making the application. It could be used when no more details are given on the datasets like URL, formats, etc.";
+	rdfs:domain odapps:AppConcept, odapps:Application;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
+	rdfs:label "dataset description".	
 
 
 #odapps:instigator
@@ -46,41 +83,29 @@ odapps:AppConcept a rdfs:Class;
 odapps:instigator a rdf:Property;
 	rdfs:label "instigator" ;
 	rdfs:comment "The Agent which conceived the idea about the App Concept (the instigator/initiator)." ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range foaf:Agent .
 
-
-#odapps:revised
-
-odapps:revised a rdf:Property ;	
-	rdfs:label "revised" ;
-	rdfs:comment "An App concept which was revised and re-posed / extended. " ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	# owl:inverseOf odapps:revises ;
-	rdfs:domain odapps:AppConcept, dvia:Application ;
-	rdfs:range  odapps:AppConcept, dvia:Application .
-
-
-#odapps:revises
-
-odapps:revised a rdf:Property ;
-	rdfs:label "revises" ;
-	rdfs:comment "An App concept which was revised, re-posed and/or extended. " ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	# owl:inverseOf odapps:revised ;
-	rdfs:domain odapps:AppConcept, dvia:Application ;
-	rdfs:range  odapps:AppConcept, dvia:Application .
-	
 
 #odapps:implements	
 
 odapps:implements a rdf:Property ;
 	rdfs:label "implements" ;
 	rdfs:comment "The App Concept that this application implements" ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
-	rdfs:domain dvia:Application ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
+	rdfs:domain odapps:Application ;
 	rdfs:range odapps:AppConcept .	
+
+
+#odapps:revision
+
+odapps:revision a rdf:Property ;	
+	rdfs:label "revision of" ;
+	rdfs:comment "An App concept which was revised and re-posed / extended. " ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
+	rdfs:domain odapps:AppConcept, odapps:Application ;
+	rdfs:range  odapps:AppConcept, odapps:Application .
 	
 
 #odapps:theme
@@ -88,10 +113,22 @@ odapps:implements a rdf:Property ;
 odapps:theme a rdf:Property ;
 	rdfs:label "theme" ;
 	rdfs:comment "The App Concept can be within a certain theme. " ;
-	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range skos:ConceptScheme .
 	
+
+#usesTool
+
+odapps:usesTool a rdf:Property;
+	rdfs:comment "This property links to the tools or libraries used for the application";
+	rdfs:domain odapps:Application;
+	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
+	rdfs:label "usesTool";
+	rdfs:range odapps:Tool.
+
+
+# -------------------------------------------------------------------------------------------------
 
 #probably a broad taxonomy as the following one.
 #Public administration & policy,
@@ -110,54 +147,3 @@ odapps:theme a rdf:Property ;
 #Work & Economy,
 #Life/Home	
 	
-
-
-# -------------------------------------------------------------------------------------------------
-
-odapps:AppConcept
-	#the URL where the App Concept is described, if any. 
-	foaf:homepage schema:WebPage;
-	
-	#the language used to describe the App Concept
-	dct:language dct:LinguisticSystem;
-	
-	#comments 
-	rev:hasComment rev:Comment ;
-	schema:comment schema:Comment ; 
-	
-	#contact details vcard?
-	schema:contactPoint schema:ContactPoint .
-	
-	#br:hasTopic br:BrTopic	; #actually a Property of br:Brainstorm
-
-
-
-#dvia:datasetDescription
-#no use the original one - was modified
-
-
-#dvia:consumes
-#use the original - was modified
-
-
-#dvia:downloadUrl
-
-
-#schema:downloadUrl
-#there should stay either the schema:downloadUrl or the dvia:downloadUrl or to define the odapps:downloadUrl
-
-
-#odapps:keyword
-#use dct:subject instead 
-
-
-#odapps:description
-#use dct:description instead
-
-
-#schema:fileFormat
-#not sure if it's really needed
-
-#dvia:system OR schema:operatingSystem
-
-#define the Derivative Vs Original Work

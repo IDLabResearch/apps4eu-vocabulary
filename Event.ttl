@@ -4,20 +4,31 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
-@prefix apps4eu: <http://apps4eu.eu/voc#>.
-@prefix odapps: <http://apps4eu.eu/odapps/voc#>.
+@prefix odapps: <http://apps4eu.eu/vocab/odapps#>.
+@prefix apps4eu: <http://apps4eu.eu/vocab/apps4X#>.
 @prefix schema: <http://schema.org/> .
-#@prefix br: <http://vocab.deri.ie/br#> .
-@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd:<http://www.w3.org/2001/XMLSchema#> .
 @prefix event: <http://purl.org/NET/c4dm/event.owl#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix lode: <http://linkedevents.org/ontology/> .
 @prefix dul: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
 @prefix rev:<http://purl.org/stuff/rev#> .
 @prefix skos:<http://www.w3.org/2004/02/skos/core#>.
+
+
+# ---------------------------------------- Metadata----------------------------------------------
+
+<http://apps4eu.eu/vocab/apps4X#>
+	a owl:Ontology;
+	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based ideas and applications published on the Web.";
+	dct:title "The vocabulary for (L)OD ideas and applications"@en;
+	dct:issued "2013-05-10"^^xsd:date;
+    dct:modified "2013-07-24"^^xsd:date;
+	dct:creator [foaf:mbox "Anastasia.Dimou@UGent.be"; foaf:name "Anastasia Dimou"];
+	dct:creator [foaf:mbox "Pieter.Colpaert@UGent.be"; foaf:name "Pieter Colpaert"].
+
 
 # ------------------------------------------ Classes --------------------------------------------
 
@@ -29,7 +40,16 @@
 apps4eu:CocreationEvent a rdfs:Class ;
 	rdfs:subClassOf event:Event, schema:Event ; 
 	rdfs:label "Co-creation event" ;
-	rdfs:comment "A co-creation event is a competition, a contest, a challenge etc. It's a subproperty as it is an event but with a certain scope" .
+	rdfs:comment "A co-creation event is a competition, a contest, a challenge etc. It's a subproperty as it is an event but with a certain scope" ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#>  .
+
+
+#Jury
+
+apps4eu:Jury a rdfs:Class ;
+    rdfs:label "Jury" ;
+    rdfs:comment "A jury evaluating the submissions to a co-creation event." ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> .   
 
 
 #Submission
@@ -37,16 +57,33 @@ apps4eu:CocreationEvent a rdfs:Class ;
 # Need to decide on the proper term to call it and how useful it is to have.
 apps4eu:Submission a rdfs:Class;
     rdfs:label "Submission" ;
-    rdfs:comment "An App Concept idea as it was submitted to a certain competition." .
+    rdfs:comment "An App Concept idea as it was submitted to a certain competition." ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#>.
 
-
-#Jury
-
-apps4eu:Jury a rdfs:Class ;
-    rdfs:label "Jury" ;
-    rdfs:comment "A jury evaluating the submissions to a co-creation event." .    
 
 # ---------------------------------------- Properties --------------------------------------------
+
+
+#apps4eu:award
+
+#it could be more than one awards offered
+apps4eu:award a rdf:Property ;
+	rdfs:label "award offered" ;
+	rdfs:comment "one or more awards offered at this co-creation event" ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+	rdfs:domain apps4eu:Event , apps4eu:Jury ;	
+	rdfs:range apps4eu:Award .
+
+
+#apps4eu:consistsOf
+
+    apps4eu:consistsOf a rdf:Property ;
+    rdfs:label "consists of" ;
+    rdfs:comment "A submission consists of " ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+    rdfs:domain apps4eu:Submission ;
+    rdfs:range odapps:AppConcept, odapps:Application .
+
 
 #apps4eu:edition
 
@@ -54,26 +91,49 @@ apps4eu:edition a rdf:Datatype ;
 	rdfs:label "edition" ;
 	rdfs:comment "The event edition. " ;
 	rdfs:domain apps4eu:Event ;
-	rdfs:range xsd:int .
+	rdfs:range xsd:int ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> .
 
 
-#apps4eu:shortTitle
+#apps4eu:juryMember
 
-apps4eu:shortTitle a rdf:Property ;
-	rdfs:label "short title" ;
-	rdfs:comment "the event's short title and/or its abbreviation" ;
+    apps4eu:juryMember a rdf:Property ;
+    rdfs:label "Jury Member" ;
+    rdfs:comment "A jury consists of " ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+    rdfs:domain apps4eu:Jury ;
+    rdfs:range foaf:Agent .	
+
+
+ #apps4eu:juryRate
+
+    apps4eu:juryRate a rdf:Property ;
+    rdfs:label "Jury's rate" ;
+    rdfs:comment "The rate given by the jury" ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+    rdfs:domain apps4eu:Submission ;
+    rdfs:range xsd:float.
+
+
+#nominated
+
+    apps4eu:nominated a rdf:Property ;
+    rdfs:label "nominated for" ;
+    rdfs:comment "An App Concept is nominated for the award. " ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+    rdfs:domain apps4eu:Submission;
+    rdfs:range apps4eu:Award .    
+
+
+#organizers sponsors partners
+
+#still needs to check whether there is an already existing ontology/vocabulary for organizers/sponsors
+apps4eu:organizer a rdfs:Property ;
+	rdfs:label "the event's organizer" ;
+	rdfs:comment "  " ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
 	rdfs:domain apps4eu:Event ;
-	rdfs:range xsd:string .
-
-
-#apps4eu:awardOffered
-
-#it could be more than one awards offered
-apps4eu:awardOffered a rdf:Property ;
-	rdfs:label "award offered" ;
-	rdfs:comment "one or more awards offered at this co-creation event" ;
-	rdfs:domain apps4eu:Event , apps4eu:Jury ;	
-	rdfs:range apps4eu:Award .
+	rdfs:range foaf:Agent .
 
 
 #registration	
@@ -81,6 +141,7 @@ apps4eu:awardOffered a rdf:Property ;
 apps4eu:registration a rdf:Property ;
 	rdfs:label "url to the registration" ;
 	rdfs:comment "a link to the registration for the event" ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
 	rdfs:subPropertyOf schema:url ; 
 	rdfs:domain apps4eu:Event ;	
 	rdfs:range xsd:anyURI .
@@ -92,18 +153,62 @@ apps4eu:size a rdf:Property ;
 	rdfs:label "the size of the event" ;
 	rdfs:comment "The event's size in regard to its thematic area and/or locality. " ;
 	#to be discussed what exactly it would be, is the number of the participants? is the number of submissions? #a description e.g. "small, big, medium, large" compared to other events
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
 	rdfs:domain apps4eu:Event .
 
 
-#the theme of the event
+#apps4eu:shortTitle
+
+apps4eu:shortTitle a rdf:Property ;
+	rdfs:label "short title" ;
+	rdfs:comment "the event's short title and/or its abbreviation" ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+	rdfs:domain apps4eu:Event ;
+	rdfs:range xsd:string .
+
+
+#the theme of the event - currently we have it both under apps4eu and odapps namespace
 
 apps4eu:theme a rdf:Property ;
 	rdfs:label "theme" ;
 	rdfs:comment "The App Concept can be within a certain theme. " ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range skos:ConceptScheme .
-	
 
+
+#apps4eu:sponsor
+
+apps4eu:sponsor a rdfs:Property ;
+	rdfs:label "the event's sponsor" ;
+	rdfs:comment "  " ;
+	rdfs:isDefinedBy <http://apps4europe.eu/voc/apps4X#> ;
+	rdfs:domain apps4eu:Event ;
+	rdfs:range foaf:Agent .
+    
+
+#apps4eu:wonAward
+
+    apps4eu:wonAward a rdf:Property ;
+    rdfs:label "won award" ;
+    rdfs:comment "links to the award that this App Concept won" ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+    rdfs:domain apps4eu:Submission ;
+    rdfs:range apps4eu:Award.
+ 
+
+
+  #apps4eu:userRate
+
+    apps4eu:usersRate a rdf:Property ;
+    rdfs:label "Users' rate" ;
+    rdfs:comment "The rate given by the users" ;
+    rdfs:isDefinedBy <http://apps4europe.eu/vocab/apps4X#> ;
+    rdfs:domain apps4eu:Submission ;
+    rdfs:range xsd:float.   
+
+
+# -------------------------------------------------------------------------------------------------
 
 #probably a broad taxonomy as the following one.
 #Public administration & policy,
@@ -121,163 +226,3 @@ apps4eu:theme a rdf:Property ;
 #Welfare,
 #Work & Economy,
 #Life/Home
-
-
-#organizers sponsors partners
-
-#still needs to check whether there is an already existing ontology/vocabulary for organizers/sponsors
-apps4eu:organizer a rdfs:Property ;
-	rdfs:label "the event's organizer" ;
-	rdfs:comment "  " ;
-	rdfs:domain apps4eu:Event ;
-	rdfs:range foaf:Agent .
-
-
-#apps4eu:sponsor
-
-apps4eu:sponsor a rdfs:Property ;
-	rdfs:label "the event's sponsor" ;
-	rdfs:comment "  " ;
-	rdfs:domain apps4eu:Event ;
-	rdfs:range foaf:Agent .
-
-#social media to track, namely twitter, facebook, google+ etc. etc.
-
-
-#apps4eu:consistsOf
-
-    apps4eu:consistsOf a rdf:Property ;
-    rdfs:label "consists of" ;
-    rdfs:comment "A submission consists of " ;
-    rdfs:domain apps4eu:Submission ;
-    rdfs:range odapps:AppConcept, odapps:Application .
-
-
-#nominated
-
-    apps4eu:nominated a rdf:Property ;
-    rdfs:label "nominated for" ;
-    rdfs:comment "An App Concept is nominated for the award. " ;
-    rdfs:domain apps4eu:Submission;
-    rdfs:range apps4eu:Award .
-    
-
-#apps4eu:wonAward
-
-    apps4eu:wonAward a rdf:Property ;
-    rdfs:label "won award" ;
-    rdfs:comment "links to the award that this App Concept won" ;
-    rdfs:domain apps4eu:Submission ;
-    rdfs:range apps4eu:Award.
- 
-
- #apps4eu:juryRate
-
-    apps4eu:juryRate a rdf:Property ;
-    rdfs:label "Jury's rate" ;
-    rdfs:comment "The rate given by the jury" ;
-    rdfs:domain apps4eu:Submission ;
-    rdfs:range xsd:float.
-
-
-  #apps4eu:juryRate
-
-    apps4eu:usersRate a rdf:Property ;
-    rdfs:label "Users' rate" ;
-    rdfs:comment "The rate given by the users" ;
-    rdfs:domain apps4eu:Submission ;
-    rdfs:range xsd:float.   
-
-
-#schema:award [ rdfs:range xsd:srting ] has string at its domain, therefore you cannot include more information about  the award
-
-
-#apps4eu:juryMembers
-
-    apps4eu:juryMembers a rdf:Property ;
-    rdfs:label "Jury Members" ;
-    rdfs:comment "A jury consists of " ;
-    rdfs:domain apps4eu:Jury ;
-    rdfs:range foaf:Agent .	
-# --------------------------------------------------------------------------------------------------
-
-
-#the title of the Event 
-
-	dc:title a rdf:Property;
-	rdfs:label "Title";
-	rdfs:comment "A name given to the resource.";
-	rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-	rdfs:range xsd:string .
-
-
-#shouldn't we have it as a foaf:Agent?
-
-schema:contactPoint a rdf:Property;
-    rdfs:label "Contact Point"@en;
-    rdfs:comment "A contact point for a person or organization."@en;
-    rdfs:domain [ a owl:Class; owl:unionOf (schema:Organization schema:Person) ];
-    rdfs:range schema:ContactPoint;
-    rdfs:isDefinedBy <http://schema.org/Organization>;
-    rdfs:isDefinedBy <http://schema.org/Person> .
-
-
-#schema:logo
-# or foaf:logo [ rdfs:range owl:Thing ] ;
-
-schema:logo a rdf:Property;
-    rdfs:label "Logo"@en;
-    rdfs:comment "URL of an image for the logo of the item."@en;
-    rdfs:domain [ a owl:Class; owl:unionOf (schema:Organization schema:Brand schema:Place schema:Product) ];
-    rdfs:range [ a owl:Class; owl:unionOf (rdfs:Resource schema:ImageObject) ];
-    rdfs:isDefinedBy <http://schema.org/Organization>;
-    rdfs:isDefinedBy <http://schema.org/Brand>;
-    rdfs:isDefinedBy <http://schema.org/Place>;
-    rdfs:isDefinedBy <http://schema.org/Product> .
-
-
-
-apps4eu:CoCreationEvent 
-		
-	
-	
-	#An Event that is part of this event.
-	
-	event:sub_event [ rdfs:range event:Event ] ;
-	schema:subEvent [ rdfs:range schema:Event ] ;
-	
-	#An event that this event is a part of.
-	schema:superEvent [ rdfs:range schema:Event ] ;
-	
-	lode:atTime [ rdfs:range time:TemporalEntity; ] ;
-	event:time [ rdfs:range time:TemporalEntity; ] ;
-	#time:hasBeginning [ rdfs:domain:TemporalEntity rdfs:range time:Instant ] ;
-	#time:hasEnd [ rdfs:domain:TemporalEntity rdfs:range time:Instant ] ;
-	
-	#the date and time the event starts, turn it to #xsd:dateTime
-	schema:startDate [ a schema:Date ];
-	
-	#the date and time the event ends, turn it to #xsd:dateTime
-	schema:endDate [ a xsd:Date ];
-	
-	#lode:atPlace [ rdfs:range dul:Place ] ; preferably dc:spatial
-	dc:spatial [rdfs:range dc:Location ] ;
-	
-	#abstract region of space
-	lode:inSpace [ rdfs:range geo:SpatialThing; ] ;
-	event:place [ rdfs:range geo:SpatialThing; ] ;
-	
-	#attendee is not exactly what is needed as it is not an attendee but rather a participant when it refers to a competition.
-	#or keep both the notion of attendee and participant? 
-	#schema:attendee [rdfs:range [a owl:Class ; owl:unionOf (schema:Organization schema:Person) ] ] ;
-
-	schema:contactPoint [rdfs:range schema:ContactPoint] .
-	
-	# organizers / sponsors / partners
-	
-	# social media
-	
-	
-apps4eu:Submission	
-	#review
-	rev:hasReview rev:Review .
