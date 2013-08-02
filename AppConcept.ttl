@@ -115,3 +115,6 @@ odapps:usesTool a rdf:Property;
 	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
 	rdfs:label "usesTool";
 	rdfs:range odapps:Tool.
+
+
+#demo uri
