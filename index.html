@@ -31,8 +31,11 @@
         <h1>
 <a name="apps-for-europe-ontology" class="anchor" href="#apps-for-europe-ontology"><span class="octicon octicon-link"></span></a>Apps for Europe ontology</h1>
 
-<p>This is a vocabulary to describe Apps for X events. It consists of a vocabulary that describes the different app concepts, in the same way that DCAT describes datasets. This vocabulary includes properties that describe the datasets used, the applications' formats and access methods, the criteria used for judging the applications, the app contest it was part of, etc. 
-The objective is that all the Apps for X contests in Europe use the same vocabulary in order to describe those concepts. </p>
+<p>This is a vocabulary to describe Apps for X events. It consists of two vocabularies: 
+  <ul>
+  <li>a vocabulary that describes the different app concepts and their corresponding applications, in the same way that DCAT describes datasets.</li>
+  <li>a vocabulary that describes the Apps4X competetions, the criteria used for judging the applications, the awards offered, the submissions, the the app contest it was part of, etc. 
+</ul>
 
 <strong>Namespace</strong><br />
 http://apps4eu.eu/voc/odapps#<br />
@@ -57,8 +60,8 @@ The Friend Friend (FOAF) vocabulary defines terms for describing people, their a
 The Creative Commons (CC) schema defines terms for describing copyright licences.</p></li>
 <li><p><strong>Schema.org</strong><br/>
 The Schema.org defines a collection of schemas.</p></li>
-<li><p><strong>Event Ontology</strong><br/>
-The Event ontogy deals with the notion of reified events. </p></li>
+<li><p><strong>RDF Review Vocabulary (REV)</strong><br/>
+Vocabulary for expressing reviews and ratings using the Resource Description Framework. </p></li>
 <li><p><strong>LODE</strong> (Linking Open Descriptions of Events)<br/>
 The LODE ontology describes an ontology for publiushing descriptions of historical events as Linked Data and for mapping between other event-related vocabularies and ontologies. </p></li>
 <li><p><strong>DCAT</strong><br/> 
@@ -68,52 +71,52 @@ The DCAT ontology describes a schema to describe datasets in data catalogs.</p><
 <h2>Namespaces</h2>
 <table>
   <tr>
-    <td>rdfs</td>
-    <td>http://www.w3.org/2000/01/rdf-schema#</td>
-  </tr>
-  <tr>
-    <td>rdf</td>
-    <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
-  </tr>
-  <tr>
-    <td>owl</td>
-    <td>http://www.w3.org/2002/07/owl#</td>
-  </tr>
-  <tr>
     <td>apps4X</td>
     <td>http://apps4eu.eu/vocab/apps4X#</td>
-  </tr>
-  <tr>
-    <td>odapps</td>
-    <td>http://apps4eu.eu/vocab/odapps#</td>
   </tr>
   <tr>
     <td>dct</td>
     <td>http://purl.org/dc/terms/</td>
   </tr>
   <tr>
-    <td>foaf</td>
-    <td>http://xmlns.com/foaf/0.1/</td>
-  </tr>
-  <tr>
-    <td>xsd</td>
-    <td> http://www.w3.org/2001/XMLSchema#</td>
-  </tr>
-    <tr>
     <td>dvia</td>
     <td> http://data.eurecom.fr/ontology/dvia#</td>
   </tr>
   <tr>
-    <td>event</td>
-    <td>http://purl.org/NET/c4dm/event.owl#</td>
+    <td>foaf</td>
+    <td>http://xmlns.com/foaf/0.1/</td>
+  </tr>
+  <tr>
+    <td>odapps</td>
+    <td>http://apps4eu.eu/vocab/odapps#</td>
   </tr>
   <tr>
     <td>lode</td>
     <td>http://linkedevents.org/ontology/</td>
   </tr>
   <tr>
+    <td>owl</td>
+    <td>http://www.w3.org/2002/07/owl#</td>
+  </tr>
+  <tr>
+    <td>rev</td>
+    <td>http://purl.org/stuff/rev#</td>
+  </tr>
+  <tr>
+    <td>rdf</td>
+    <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+  </tr>
+  <tr>
+    <td>rdfs</td>
+    <td>http://www.w3.org/2000/01/rdf-schema#</td>
+  </tr>
+  <tr>
     <td>schema</td>
     <td>http://schema.org/</td>
+  </tr>
+  <tr>
+    <td>xsd</td>
+    <td> http://www.w3.org/2001/XMLSchema#</td>
   </tr>
 </table>
 
@@ -123,7 +126,6 @@ The DCAT ontology describes a schema to describe datasets in data catalogs.</p><
 
 <h3>Classes</h3>
 <ul>
-  <li>Application</li>
   <li>AppConcept</li>
   <li>Application</li>
   <li>CocreationEvent</li>
@@ -134,7 +136,7 @@ The DCAT ontology describes a schema to describe datasets in data catalogs.</p><
 
 <h3>Properties</h3>
 
-award, consistsOf, edition, implements, instigator, juryMember, juryRate, nominated, organizer, sponsor, registration, revision, size, short title, theme, userRate, wonAward
+award, awardCeremony, consistsOf, consumes, datasetDescription, edition, implements, instigator, juryMember, juryRate, nominated, organizer, prize, sponsor, registration, revision, size, short title, theme, userRate, usesTool, wonAward
 
       </section>
       <footer>
