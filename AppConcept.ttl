@@ -24,11 +24,13 @@
 	dct:issued "2013-05-10"^^xsd:date;
     dct:modified "2013-07-24"^^xsd:date;
 	dct:creator [foaf:mbox "Anastasia.Dimou@UGent.be"; foaf:name "Anastasia Dimou"];
-	dct:creator [foaf:mbox "Pieter.Colpaert@UGent.be"; foaf:name "Pieter Colpaert"].
+	dct:creator [foaf:mbox "Pieter.Colpaert@UGent.be"; foaf:name "Pieter Colpaert"];
+	dct:contributor [foaf:mbox "rtroncy@eurecom.fr"; foaf:name "Raphael Troncy"];.
 
 
 
 # ---------------------------------------- Classes ----------------------------------------------
+
 
 #App Concept
 
@@ -39,7 +41,7 @@ odapps:AppConcept a rdfs:Class;
 
 
 #Application
-#either extending the dvia:Application or having the odapps:Application
+#extends the dvia:Application
 
 odapps:Application a rdfs:Class;
 	#dvia:Application rdfs:subClassOf odapps:Application;
@@ -48,8 +50,10 @@ odapps:Application a rdfs:Class;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> . 
 
 
-odapps:Tool a rdfs:Class,
-		owl:Class;
+#Tool
+#extends the dvia:VisualTool
+
+odapps:Tool a rdfs:Class;
 	rdfs:comment "The tool or library used to build the application";
 	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
 	#dvia:VisualTool rdfs:subClassOf odapps:Tool ;
@@ -58,6 +62,7 @@ odapps:Tool a rdfs:Class,
 # ------------------------------------ Properties ------------------------------------------------	
 
 #odapps:consumes
+#extends dvia:consumes
 
 odapps:consumes a rdf:Property,
 		owl:ObjectProperty;
@@ -69,12 +74,24 @@ odapps:consumes a rdf:Property,
 
 
 #datasetDescription
+#extends dvia:datasetDescription
 
 odapps:datasetDescription a rdf:Property;
 	rdfs:comment "Property for a given descriptive informations of the datasets used for making the application. It could be used when no more details are given on the datasets like URL, formats, etc.";
 	rdfs:domain odapps:AppConcept, odapps:Application;
 	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
-	rdfs:label "dataset description".	
+	rdfs:label "dataset description".
+
+
+#hasLicense
+#redefines dvia:hasLicense
+
+odapps:hasLicense a rdf:Property;
+	rdfs:comment "This property links to the license of the application";
+	rdfs:domain odapps:Application;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
+	rdfs:label "hasLicense";
+	rdfs:range xsd:anyURI.
 
 
 #odapps:instigator
@@ -108,6 +125,7 @@ odapps:revision a rdf:Property ;
 	
 
 #usesTool
+#extends dvia:usesTool
 
 odapps:usesTool a rdf:Property;
 	rdfs:comment "This property links to the tools or libraries used for the application";
