@@ -1,65 +1,79 @@
 @base <http://apps4eu.eu/vocab/odapps#>.
 
 @prefix org: <http://www.w3.org/ns/org#>.
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
-@prefix odapps: <http://apps4europe.eu/vocab/odapps#>.
-@prefix owl: <http://www.w3.org/2002/07/owl#>.
-@prefix dvia: <http://data.eurecom.fr/ontology/dvia#>.
+@prefix odapps: <http://apps4europe.eu/vocab/odapps#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dvia: <http://purl.org/ontology/dvia#> .
 @prefix schema: <http://schema.org/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rev:<http://purl.org/stuff/rev#> .
-@prefix skos:<http://www.w3.org/2004/02/skos/core#>.
+@prefix skos:<http://www.w3.org/2004/02/skos/core#> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix cc:      <http://creativecommons.org/ns#> .
 
 
-# ---------------------------------------- Metadata----------------------------------------------
+# ------------------------------- Metadata----------------------------------------------
 
-<http://apps4europe.eu/vocab/odapps#>
+<http://apps4europe.eu/vocab/odapps>
 	a owl:Ontology;
-	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based ideas and applications published on the Web.";
+	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based ideas and applications published on the Web."@en ;
 	dct:title "The vocabulary for (L)OD ideas and applications"@en;
 	dct:issued "2013-05-10"^^xsd:date;
     dct:modified "2013-07-24"^^xsd:date;
 	dct:creator [foaf:mbox "Anastasia.Dimou@UGent.be"; foaf:name "Anastasia Dimou"];
 	dct:creator [foaf:mbox "Pieter.Colpaert@UGent.be"; foaf:name "Pieter Colpaert"];
-	dct:contributor [foaf:mbox "rtroncy@eurecom.fr"; foaf:name "Raphael Troncy"];.
+	dct:contributor [foaf:mbox "rtroncy@eurecom.fr"; foaf:name "Raphael Troncy"] ;
+	dct:contributor [foaf:mbox "atemezin@eurecom.fr"; foaf:name "Ghislain Auguste Atemezing"] ;
+	cc:license <http://creativecommons.org/licenses/by/3.0/> ; 
+	vann:preferredNamespacePrefix "odapps" ;
+	owl:versionInfo "1.1 - 2013-12-13" .
 
 
 
-# ---------------------------------------- Classes ----------------------------------------------
+########--- Classes --------------##########
+###########################################
 
 
 #App Concept
 
 odapps:AppConcept a rdfs:Class;
-	rdfs:label "Application Concept" ; 
-	rdfs:comment "An App Concept describes an idea for an application (a digital work) which refers to Open Data." ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> .
+	rdfs:label "Application Concept"@en ; 
+	rdfs:comment "An App Concept describes an idea for an application (a digital work) which refers to Open Data."@en ;
+	rdfs:subClassOf frbr:Work ; ## added by Ghislain
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> .
 
 
 #Application
 #extends the dvia:Application
 
+##Why not having a link from Concept to Application, like implement(Concept, Application) or even frbr:realization?
+
 odapps:Application a rdfs:Class;
 	#dvia:Application rdfs:subClassOf odapps:Application;
-	rdfs:label "Application";
+	rdfs:label "Application"@en ;
 	rdfs:comment "An App Concept implementation." ;
 	rdfs:isDefinedBy <http://apps4eu.eu/odapps#> . 
+
 
 
 #Tool
 #extends the dvia:VisualTool
 
 odapps:Tool a rdfs:Class;
-	rdfs:comment "The tool or library used to build the application";
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
+	rdfs:comment "The tool or library used to build the application."@en ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
 	#dvia:VisualTool rdfs:subClassOf odapps:Tool ;
-	rdfs:label "Tool".
+	rdfs:label "Tool."@en .
 
-# ------------------------------------ Properties ------------------------------------------------	
+
+##### Properties ---------#########
+####-#############################
 
 #odapps:consumes
 #extends dvia:consumes
@@ -68,71 +82,81 @@ odapps:consumes a rdf:Property,
 		owl:ObjectProperty;
 	rdfs:comment "links to the dataset used to make the application, and could be of different types or formats";
 	rdfs:domain odapps:Application, odapps:AppConcept;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
-	rdfs:label "consumes";
-	rdfs:range dcat:Dataset, xsd:string.
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
+	rdfs:label "consumes"@en ;
+	rdfs:range dcat:Dataset, xsd:string. ## TODO: See why this range. Dataset only? not both.
 
 
 #datasetDescription
 #extends dvia:datasetDescription
 
-odapps:datasetDescription a rdf:Property;
-	rdfs:comment "Property for a given descriptive informations of the datasets used for making the application. It could be used when no more details are given on the datasets like URL, formats, etc.";
-	rdfs:domain odapps:AppConcept, odapps:Application;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
-	rdfs:label "dataset description".
+odapps:datasetDescription a rdf:Property, owl:ObjectProperty ;
+	rdfs:comment "Property for a given descriptive informations of the datasets used for making the application. It could be used when no more details are given on the datasets like URL, formats, etc."@en ;
+	rdfs:domain odapps:AppConcept, odapps:Application; # why both concepts and application ?
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
+	rdfs:label "dataset description"@en .
 
 
 #hasLicense
 #redefines dvia:hasLicense
 
-odapps:hasLicense a rdf:Property;
+odapps:hasLicense a rdf:Property, owl:DatatypeProperty;
 	rdfs:comment "This property links to the license of the application";
 	rdfs:domain odapps:Application;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#>;
-	rdfs:label "hasLicense";
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
+	rdfs:label "hasLicense"@en ;
 	rdfs:range xsd:anyURI.
 
 
 #odapps:instigator
 
-odapps:instigator a rdf:Property;
-	rdfs:label "instigator" ;
-	rdfs:comment "The Agent which conceived the idea about the App Concept (the instigator/initiator)." ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
+odapps:instigator a rdf:Property, owl:ObjectProperty;
+	rdfs:label "instigator"@en ;
+	rdfs:comment "The Agent which conceived the idea about the App Concept (the instigator/initiator)."@en ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range foaf:Agent .
 
 
 #odapps:implements	
 
-odapps:implements a rdf:Property ;
-	rdfs:label "implements" ;
-	rdfs:comment "The App Concept that this application implements" ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
+odapps:implements a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "implements"@en ;
+	rdfs:comment "The App Concept that this application implements"@en ;
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> ;
 	rdfs:domain odapps:Application ;
 	rdfs:range odapps:AppConcept .	
 
 
 #odapps:revision
+#version maybe? 
 
 odapps:revision a rdf:Property ;	
 	rdfs:label "revision of" ;
 	rdfs:comment "An App concept which was revised and re-posed / extended. " ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps#> ;
-	rdfs:domain odapps:AppConcept, odapps:Application ;
-	rdfs:range  odapps:AppConcept, odapps:Application .
+	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> ;
+	rdfs:domain  odapps:Application ;
+	rdfs:range  xsd:decimal . ## added by Ghislain
 	
 
 #usesTool
 #extends dvia:usesTool
 
 odapps:usesTool a rdf:Property;
-	rdfs:comment "This property links to the tools or libraries used for the application";
+	rdfs:comment "This property links to the tools or libraries used for the application"@en ;
 	rdfs:domain odapps:Application;
-	rdfs:isDefinedBy <http://data.eurecom.fr/ontology/dvia>;
-	rdfs:label "usesTool";
+	rdfs:isDefinedBy <http://purl.org/ontology/dvia>;
+	rdfs:label "usesTool"@en ;
 	rdfs:range odapps:Tool.
 
 
 #demo uri
+
+##----Axiomes here----#######
+## TODO: DISCUSS #####
+
+odapps:implementation rdfs:subPropertyOf frbr:realization .
+odapps:implementationOf rdfs:subPropertyOf frbr:realizationOf .
+
+odapps:Application odapps:implementationOf odapps:AppConcept .
+odapps:AppConcept odapps:implementation odapps:Application .
