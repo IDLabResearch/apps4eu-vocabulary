@@ -4,7 +4,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
-@prefix odapps: <http://apps4europe.eu/vocab/odapps#> .
+@prefix odapps: <http://semweb.mmlab.be/ns/odapps#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dvia: <http://purl.org/ontology/dvia#> .
 @prefix schema: <http://schema.org/> .
@@ -20,7 +20,7 @@
 
 # ------------------------------- Metadata----------------------------------------------
 
-<http://apps4europe.eu/vocab/odapps>
+<http://semweb.mmlab.be/odapps>
 	a owl:Ontology;
 	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based ideas and applications published on the Web."@en ;
 	dct:title "The vocabulary for (L)OD ideas and applications"@en;
@@ -46,7 +46,7 @@ odapps:AppConcept a rdfs:Class;
 	rdfs:label "Application Concept"@en ; 
 	rdfs:comment "An App Concept describes an idea for an application (a digital work) which refers to Open Data."@en ;
 	rdfs:subClassOf frbr:Work ; ## added by Ghislain
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> .
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps> .
 
 
 #Application
@@ -67,7 +67,7 @@ odapps:Application a rdfs:Class;
 
 odapps:Tool a rdfs:Class;
 	rdfs:comment "The tool or library used to build the application."@en ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps>;
 	#dvia:VisualTool rdfs:subClassOf odapps:Tool ;
 	rdfs:label "Tool."@en .
 
@@ -82,7 +82,7 @@ odapps:consumes a rdf:Property,
 		owl:ObjectProperty;
 	rdfs:comment "links to the dataset used to make the application, and could be of different types or formats";
 	rdfs:domain odapps:Application, odapps:AppConcept;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps>;
 	rdfs:label "consumes"@en ;
 	rdfs:range dcat:Dataset, xsd:string. ## TODO: See why this range. Dataset only? not both.
 
@@ -93,7 +93,7 @@ odapps:consumes a rdf:Property,
 odapps:datasetDescription a rdf:Property, owl:ObjectProperty ;
 	rdfs:comment "Property for a given descriptive informations of the datasets used for making the application. It could be used when no more details are given on the datasets like URL, formats, etc."@en ;
 	rdfs:domain odapps:AppConcept, odapps:Application; # why both concepts and application ?
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps>;
 	rdfs:label "dataset description"@en .
 
 
@@ -103,7 +103,7 @@ odapps:datasetDescription a rdf:Property, owl:ObjectProperty ;
 odapps:hasLicense a rdf:Property, owl:DatatypeProperty;
 	rdfs:comment "This property links to the license of the application";
 	rdfs:domain odapps:Application;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps>;
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps>;
 	rdfs:label "hasLicense"@en ;
 	rdfs:range xsd:anyURI.
 
@@ -113,7 +113,7 @@ odapps:hasLicense a rdf:Property, owl:DatatypeProperty;
 odapps:instigator a rdf:Property, owl:ObjectProperty;
 	rdfs:label "instigator"@en ;
 	rdfs:comment "The Agent which conceived the idea about the App Concept (the instigator/initiator)."@en ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> ;
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps> ;
 	rdfs:domain odapps:AppConcept ;
 	rdfs:range foaf:Agent .
 
@@ -123,7 +123,7 @@ odapps:instigator a rdf:Property, owl:ObjectProperty;
 odapps:implements a rdf:Property, owl:ObjectProperty ;
 	rdfs:label "implements"@en ;
 	rdfs:comment "The App Concept that this application implements"@en ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> ;
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps> ;
 	rdfs:domain odapps:Application ;
 	rdfs:range odapps:AppConcept .	
 
@@ -134,7 +134,7 @@ odapps:implements a rdf:Property, owl:ObjectProperty ;
 odapps:revision a rdf:Property ;	
 	rdfs:label "revision of" ;
 	rdfs:comment "An App concept which was revised and re-posed / extended. " ;
-	rdfs:isDefinedBy <http://apps4europe.eu/vocab/odapps> ;
+	rdfs:isDefinedBy <http://semweb.mmlab.be/odapps> ;
 	rdfs:domain  odapps:Application ;
 	rdfs:range  xsd:decimal . ## added by Ghislain
 	
