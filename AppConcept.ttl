@@ -1,4 +1,4 @@
-@base <http://apps4eu.eu/vocab/odapps#>.
+@base <http://semweb.mmlab.be/ns/odapps#>.
 
 @prefix org: 	<http://www.w3.org/ns/org#>.
 @prefix rdfs: 	<http://www.w3.org/2000/01/rdf-schema#> .
@@ -49,7 +49,7 @@ odapps:AppConcept a rdfs:Class;
 
 #Application
 #extends the dvia:Application
-dvia:Application rdfs:subClassOf odapps:Application;
+dvia:Application rdfs:subClassOf odapps:Application.
 
 odapps:Application a rdfs:Class;
 	rdfs:label "Application"@en ;
@@ -59,7 +59,7 @@ odapps:Application a rdfs:Class;
 
 #Tool
 #extends the dvia:VisualTool
-dvia:VisualTool rdfs:subClassOf odapps:Tool ;
+dvia:VisualTool rdfs:subClassOf odapps:Tool .
 
 odapps:Tool a rdfs:Class;
 	rdfs:comment "The tool or library used to build the application."@en ;
