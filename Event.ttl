@@ -17,8 +17,8 @@
 
 <http://semweb.mmlab.be/ns/apps4X>
 	a owl:Ontology;
-	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events."@en;
-	dct:description "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events."@en;
+	rdfs:comment "apps4X is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events."@en;
+	dct:description "apps4X is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events."@en;
 	dct:title "The vocabulary for Co-creation Events based on Open Data"@en;
 	dct:issued "2013-05-10"^^xsd:date;
     dct:modified "2014-06-16"^^xsd:date;
