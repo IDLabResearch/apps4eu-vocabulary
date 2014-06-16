@@ -15,9 +15,10 @@
 
 # ---------------------------------------- Metadata----------------------------------------------
 
-<http://semweb.mmlab.be/ns/apps4X#>
+<http://semweb.mmlab.be/ns/apps4X>
 	a owl:Ontology;
-	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events.";
+	rdfs:comment "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events."@en;
+	dct:description "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events."@en;
 	dct:title "The vocabulary for Co-creation Events based on Open Data"@en;
 	dct:issued "2013-05-10"^^xsd:date;
     dct:modified "2013-07-24"^^xsd:date;
@@ -32,34 +33,34 @@
 # need to decide on the proper word to call it, is co-creation event? is it co-creation competition? is it competition? is it contest? 
 # or use alternative labels.
 # A cocreation event may be an event on its own or it could be a competition in the frame of a broader event
-apps4X:CocreationEvent a rdfs:Class ;
+apps4X:CocreationEvent a rdfs:Class, owl:Class ;
 	rdfs:subClassOf lode:Event, schema:Event ; 
-	rdfs:label "Co-creation event" ;
-	rdfs:comment "A co-creation event is a competition, a contest, a challenge etc. It's a subproperty as it is an event but with a certain scope" ;
+	rdfs:label "Co-creation event"@en ;
+	rdfs:comment "A co-creation event is a competition, a contest, a challenge etc. It's a subproperty as it is an event but with a certain scope"@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X>  .
 
 
 #Jury
 
-apps4X:Jury a rdfs:Class ;
-    rdfs:label "Jury" ;
-    rdfs:comment "A jury evaluating the submissions to a co-creation event." ;
-    rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X#> .   
+apps4X:Jury a rdfs:Class, owl:Class ;
+    rdfs:label "Jury"@en ;
+    rdfs:comment "A jury evaluating the submissions to a co-creation event."@en ;
+    rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> .   
 
 
 #Submission
 
-apps4X:Submission a rdfs:Class;
-    rdfs:label "Submission" ;
-    rdfs:comment "An App Concept idea as it was submitted to a certain competition." ;
+apps4X:Submission a rdfs:Class, owl:Class ;
+    rdfs:label "Submission"@en ;
+    rdfs:comment "An App Concept idea as it was submitted to a certain competition."@en ;
     rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X>.
 
 
 #Award
 
-apps4X:Award a rdfs:Class;
-	rdfs:label "Award" ;
-	rdfs:comment "the award offered by the jury to a certain App Concept" ;
+apps4X:Award a rdfs:Class, owl:Class;
+	rdfs:label "Award"@en ;
+	rdfs:comment "the award offered by the jury to a certain App Concept"@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> .
 
 
@@ -68,9 +69,9 @@ apps4X:Award a rdfs:Class;
 
 #apps4X:award
 
-apps4X:award a rdf:Property ;
-	rdfs:label "award offered" ;
-	rdfs:comment "one or more awards offered at this co-creation event" ;
+apps4X:award a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "award offered"@en ;
+	rdfs:comment "one or more awards offered at this co-creation event"@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:CocreationEvent , apps4X:Jury ;	
 	rdfs:range apps4X:Award .
@@ -78,9 +79,9 @@ apps4X:award a rdf:Property ;
 
 #apps4X:awardCeremony
 
-apps4X:awardCeremony a rdf:Property; 
-	rdfs:label "award's ceremnoy" ;
-	rdfs:comment "The award ceremony" ;
+apps4X:awardCeremony a rdf:Property, owl:ObjectProperty ; 
+	rdfs:label "award's ceremnoy"@en ;
+	rdfs:comment "The award ceremony"@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:Award ;
 	rdfs:range lode:Event, schema:Event .
@@ -88,9 +89,9 @@ apps4X:awardCeremony a rdf:Property;
 
 #apps4X:consistsOf
 
-    apps4X:consistsOf a rdf:Property ;
-    rdfs:label "consists of" ;
-    rdfs:comment "A submission consists of " ;
+    apps4X:consistsOf a rdf:Property, owl:ObjectProperty ;
+    rdfs:label "consists of"@en ;
+    rdfs:comment "A submission consists of "@en ;
     rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
     rdfs:domain apps4X:Submission ;
     rdfs:range odapps:AppConcept, odapps:Application .
@@ -98,9 +99,9 @@ apps4X:awardCeremony a rdf:Property;
 
 #apps4X:edition
 
-apps4X:edition a rdf:Datatype ;
-	rdfs:label "edition" ;
-	rdfs:comment "The event edition. " ;
+apps4X:edition a rdf:Datatype, owl:DatatypeProperty;
+	rdfs:label "edition"@en ;
+	rdfs:comment "The event edition. "@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:CocreationEvent ;
 	rdfs:range xsd:int .
@@ -108,9 +109,9 @@ apps4X:edition a rdf:Datatype ;
 
 #apps4X:juryMember
 
-    apps4X:juryMember a rdf:Property ;
-    rdfs:label "Jury Member" ;
-    rdfs:comment "A jury consists of " ;
+    apps4X:juryMember a rdf:Property, owl:ObjectProperty ;
+    rdfs:label "Jury Member"@en ;
+    rdfs:comment "A jury consists of "@en ;
     rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
     rdfs:domain apps4X:Jury ;
     rdfs:range foaf:Agent .	
@@ -118,9 +119,9 @@ apps4X:edition a rdf:Datatype ;
 
  #apps4X:juryRate
 
-    apps4X:juryRate a rdf:Property ;
-    rdfs:label "Jury's rate" ;
-    rdfs:comment "The rate given by the jury" ;
+    apps4X:juryRate a rdf:Property, owl:DatatypeProperty ;
+    rdfs:label "Jury's rate"@en ;
+    rdfs:comment "The rate given by the jury"@en ;
     rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
     rdfs:domain apps4X:Submission ;
     rdfs:range xsd:float.
@@ -128,9 +129,9 @@ apps4X:edition a rdf:Datatype ;
 
 #nominated
 
-    apps4X:nominated a rdf:Property ;
-    rdfs:label "nominated for" ;
-    rdfs:comment "An App Concept is nominated for the award. " ;
+    apps4X:nominated a rdf:Property, owl:ObjectProperty ;
+    rdfs:label "nominated for"@en ;
+    rdfs:comment "An App Concept is nominated for the award."@en ;
     rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
     rdfs:domain apps4X:Submission;
     rdfs:range apps4X:Award .    
@@ -138,9 +139,9 @@ apps4X:edition a rdf:Datatype ;
 
 #organizer
 
-apps4X:organizer a rdfs:Property ;
-	rdfs:label "the event's organizer" ;
-	rdfs:comment "  " ;
+apps4X:organizer a rdfs:Property, owl:ObjectProperty ;
+	rdfs:label "organizer"@en ;
+	rdfs:comment "the event's organizer"@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:CocreationEvent ;
 	rdfs:range foaf:Agent .
@@ -148,18 +149,18 @@ apps4X:organizer a rdfs:Property ;
 
 #apps4X:prize
 
-apps4X:prize a rdf:Property;
-	rdfs:label "prize" ;
-	rdfs:comment "The actual prize offered." ;
+apps4X:prize a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "prize"@en ;
+	rdfs:comment "The actual prize offered."@en ;
 	rdfs:domain apps4X:Award;
 	rdfs:range xsd:string .	
 
 
 #registration	
 
-apps4X:registration a rdf:Property ;
-	rdfs:label "url to the registration" ;
-	rdfs:comment "a link to the registration for the event" ;
+apps4X:registration a rdf:Propert, owl:DatatypeProperty ;
+	rdfs:label "url to the registration"@en ;
+	rdfs:comment "a link to the registration for the event"@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:subPropertyOf schema:url ; 
 	rdfs:domain apps4X:CocreationEvent ;	
@@ -168,9 +169,9 @@ apps4X:registration a rdf:Property ;
 
 #size	
 
-apps4X:size a rdf:Property ;
-	rdfs:label "the size of the event" ;
-	rdfs:comment "The event's size in regard to its thematic area and/or locality. " ;
+apps4X:size a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "the size of the event"@en ;
+	rdfs:comment "The event's size in regard to its thematic area and/or locality. "@en ;
 	#to be discussed what exactly it would be, is the number of the participants? is the number of submissions? #a description e.g. "small, big, medium, large" compared to other events
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:CocreationEvent .
@@ -178,9 +179,9 @@ apps4X:size a rdf:Property ;
 
 #apps4X:shortTitle
 
-apps4X:shortTitle a rdf:Property ;
-	rdfs:label "short title" ;
-	rdfs:comment "the event's short title and/or its abbreviation" ;
+apps4X:shortTitle a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "short title"@en ;
+	rdfs:comment "the event's short title and/or its abbreviation"@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:CocreationEvent ;
 	rdfs:range xsd:string .
@@ -188,9 +189,9 @@ apps4X:shortTitle a rdf:Property ;
 
 #apps4X:sponsor
 
-apps4X:sponsor a rdfs:Property ;
-	rdfs:label "the event's sponsor" ;
-	rdfs:comment "  " ;
+apps4X:sponsor a rdfs:Property, owl:ObjectProperty ;
+	rdfs:label "sponsor"@en ;
+	rdfs:comment " the event's sponsor "@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:CocreationEvent ;
 	rdfs:range foaf:Agent .
@@ -198,9 +199,9 @@ apps4X:sponsor a rdfs:Property ;
 
 #theme of the event
 
-apps4X:theme a rdf:Property ;
-	rdfs:label "theme" ;
-	rdfs:comment "The App Concept can be within a certain theme. " ;
+apps4X:theme a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "theme"@en ;
+	rdfs:comment "The App Concept can be within a certain theme."@en ;
 	rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
 	rdfs:domain apps4X:CocreationEvent, odapps:AppConcept, odapps:Application ;
 	rdfs:range skos:ConceptScheme .
@@ -208,9 +209,9 @@ apps4X:theme a rdf:Property ;
 
 #apps4X:wonAward
 
-    apps4X:wonAward a rdf:Property ;
-    rdfs:label "won award" ;
-    rdfs:comment "links to the award that this App Concept won" ;
+    apps4X:wonAward a rdf:Property, owl:ObjectProperty ;
+    rdfs:label "won award"@en ;
+    rdfs:comment "links to the award that this App Concept won"@en ;
     rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
     rdfs:domain apps4X:Submission ;
     rdfs:range apps4X:Award.
@@ -218,9 +219,9 @@ apps4X:theme a rdf:Property ;
 
   #apps4X:usersRate
 
-    apps4X:usersRate a rdf:Property ;
-    rdfs:label "Users' rate" ;
-    rdfs:comment "The rate given by the users" ;
+    apps4X:usersRate a rdf:Property, owl:DatatypeProperty ;
+    rdfs:label "Users' rate"@en ;
+    rdfs:comment "The rate given by the users"@en ;
     rdfs:isDefinedBy <http://semweb.mmlab.be/ns/apps4X> ;
     rdfs:domain apps4X:Submission ;
     rdfs:range xsd:float.   
