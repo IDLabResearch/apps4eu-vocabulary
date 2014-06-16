@@ -8,10 +8,10 @@
 @prefix apps4X: <http://semweb.mmlab.be/ns/apps4X#>.
 @prefix schema: <http://schema.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix xsd:<http://www.w3.org/2001/XMLSchema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix lode: <http://linkedevents.org/ontology/> .
-@prefix skos:<http://www.w3.org/2004/02/skos/core#>.
-
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+ 
 
 # ---------------------------------------- Metadata----------------------------------------------
 
@@ -21,8 +21,9 @@
 	dct:description "odapps is an RDF vocabulary defined to facilitate the description of Open-Data-based Co-creation events."@en;
 	dct:title "The vocabulary for Co-creation Events based on Open Data"@en;
 	dct:issued "2013-05-10"^^xsd:date;
-    dct:modified "2013-07-24"^^xsd:date;
+    dct:modified "2014-06-16"^^xsd:date;
 	dct:creator [foaf:mbox "Anastasia.Dimou@UGent.be"; foaf:name "Anastasia Dimou"];
+	dct:creator [foaf:name "Ghislain Atemezing"];
 	dct:creator [foaf:mbox "Pieter.Colpaert@UGent.be"; foaf:name "Pieter Colpaert"].
 
 
